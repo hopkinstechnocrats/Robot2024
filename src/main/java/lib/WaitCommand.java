@@ -1,10 +1,10 @@
 package lib;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
-public class WaitCommand extends CommandBase {
+public class WaitCommand extends Command {
     final JoystickButton button;
 
     public WaitCommand(JoystickButton button) {
