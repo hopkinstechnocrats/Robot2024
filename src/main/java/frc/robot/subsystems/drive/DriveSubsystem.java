@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -26,8 +27,11 @@ import edu.wpi.first.wpilibj.SerialPort;
 
 @SuppressWarnings("PMD.ExcessiveImports")
 public class DriveSubsystem extends SubsystemBase {
-  NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = inst.getTable("Drive");
+  public NetworkTableInstance inst;
+  public NetworkTable table;
+  public NetworkTable pidP;
+  public NetworkTable pidI;
+  public NetworkTable pidD;
   //rTrigger is used to add an increased max speed relative to how much the trigger is pushed. This makes it controllable and smooth.
   double rTrigger;
 
@@ -108,6 +112,11 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("PID P Gain Input", 0);
     SmartDashboard.putData("field", m_field);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("Drive");
+    //pidP = table.getEntry("PID P").setDouble(kPModuleDriveController);
+    //pidI = table.getEntry("PID P").setDouble(kIModuleDriveController);
+    //pidD = table.getEntry("PID P").setDouble(kDModuleDriveController);
   }
 
   @Override
