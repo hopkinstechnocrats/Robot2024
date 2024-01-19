@@ -1,25 +1,39 @@
 package frc.robot.subsystems.drive;
 
+import frc.robot.Constants;
+import frc.robot.Constants.ModuleConstants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.Constants.ModuleConstants;
 import lib.iotemplates.ClosedLoopIO;
 import lib.talonconfiguration.BaseTalonFXConfiguration;
 
+
 public class ModuleDriveIO implements ClosedLoopIO {
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     NetworkTable moduleTable;
-    NetworkTable table;
+    NetworkTableEntry pidP;
+    NetworkTableEntry pidI;
+    NetworkTableEntry pidD;
+
+
 
     private final WPI_TalonFX driveMotor;
     private boolean inverted;
     double driveOutput;
     double velocitySetpointRadPerSec;
+
+    NetworkTable table = inst.getTable("table");
+    pidP = table.getEntry("PID P").setDouble(Constants.ModuleConstants.kPModuleDriveController);
+    pidI = table.getEntry("PID P").setDouble(Constants.ModuleConstants.kIModuleDriveController);
+    pidD = table.getEntry("PID P").setDouble(Constants.ModuleConstants.kDModuleDriveController);
+}
 
     //PID controller for speed
     private final PIDController m_drivePIDController = new PIDController(
