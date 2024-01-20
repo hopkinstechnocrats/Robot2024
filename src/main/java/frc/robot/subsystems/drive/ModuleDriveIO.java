@@ -1,39 +1,25 @@
 package frc.robot.subsystems.drive;
 
-import frc.robot.Constants;
-import frc.robot.Constants.ModuleConstants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.Constants.ModuleConstants;
 import lib.iotemplates.ClosedLoopIO;
 import lib.talonconfiguration.BaseTalonFXConfiguration;
 
-
 public class ModuleDriveIO implements ClosedLoopIO {
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
-    NetworkTable moduleTable;
-    NetworkTableEntry pidP;
-    NetworkTableEntry pidI;
-    NetworkTableEntry pidD;
-
-
+    NetworkTable table;
+    NetworkTable ioTable;
 
     private final WPI_TalonFX driveMotor;
     private boolean inverted;
     double driveOutput;
     double velocitySetpointRadPerSec;
-
-    NetworkTable table = inst.getTable("table");
-    pidP = table.getEntry("PID P").setDouble(Constants.ModuleConstants.kPModuleDriveController);
-    pidI = table.getEntry("PID P").setDouble(Constants.ModuleConstants.kIModuleDriveController);
-    pidD = table.getEntry("PID P").setDouble(Constants.ModuleConstants.kDModuleDriveController);
-}
 
     //PID controller for speed
     private final PIDController m_drivePIDController = new PIDController(
@@ -45,10 +31,10 @@ public class ModuleDriveIO implements ClosedLoopIO {
     String corners;
 
     public ModuleDriveIO(int motorPort, boolean inverted, String corners) {
-        moduleTable = inst.getTable(corners);
-        table = moduleTable.getSubTable("Drive");
+        table = inst.getTable(corners);
+        ioTable = table.getSubTable("Drive");
         this.inverted = inverted;
-        driveMotor = new WPI_TalonFX(motorPort);
+        driveMotor = new WPI_TalonFX(motorPort, "GertrudeGreyser");
         // set status frame period of drive motor
         driveMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
         driveMotor.configAllSettings(new BaseTalonFXConfiguration());
@@ -61,10 +47,9 @@ public class ModuleDriveIO implements ClosedLoopIO {
     }
 
     public void updateInputs(ClosedLoopIOInputs inputs) {
-        inputs.velocityRadPerSec = getVelocityRadPerSecond();
         inputs.appliedVolts = driveMotor.getMotorOutputVoltage();
-        inputs.positionRad = getPositionRad();
-        inputs.toLog(table);
+        inputs.velocityRadPerSec = getVelocityRadPerSecond();
+        inputs.toLog(ioTable);
     }
 
     double getPositionRad() {
@@ -89,7 +74,6 @@ public class ModuleDriveIO implements ClosedLoopIO {
         // Logger.getInstance().recordOutput(corners+" Measurement", getVelocityRadPerSecond());
 
         driveMotor.setVoltage(driveOutput);
-        table.getEntry("Output Voltage").setDouble(driveOutput);
     }
 
  //Set Neutral Mode

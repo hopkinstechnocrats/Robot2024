@@ -9,11 +9,9 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import frc.robot.Constants;
+import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.ModuleConstants;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -29,7 +27,8 @@ import edu.wpi.first.wpilibj.SerialPort;
 
 @SuppressWarnings("PMD.ExcessiveImports")
 public class DriveSubsystem extends SubsystemBase {
-
+  NetworkTableInstance inst = NetworkTableInstance.getDefault();
+  NetworkTable table = inst.getTable("Drive");
   //rTrigger is used to add an increased max speed relative to how much the trigger is pushed. This makes it controllable and smooth.
   double rTrigger;
 
@@ -127,7 +126,7 @@ public class DriveSubsystem extends SubsystemBase {
     m_rearLeft.periodic();
     m_rearRight.periodic();
     SmartDashboard.putNumber("Heading", getHeading().getDegrees());
-    m_field.setRobotPose(getPose());
+    m_field.setRobotPose(getPose()); // Be sure to use Degrees and not Radians in AdvantageScope
   }
 
   /**
@@ -168,6 +167,15 @@ public class DriveSubsystem extends SubsystemBase {
     rot =  -1* MathUtil.applyDeadband(rot, 0.4);
     ySpeed = negate*MathUtil.applyDeadband(ySpeed, 0.2);
     xSpeed =  negate*MathUtil.applyDeadband(xSpeed, 0.2);
+
+    if (Math.abs(xSpeed) > 0.2) {
+      xSpeed = xSpeed + (xSpeed/Math.abs(xSpeed)) * rTrigger * DriveConstants.kBoostModifier;
+    } 
+
+    if (Math.abs(ySpeed) > 0.2) {
+      ySpeed = ySpeed + (ySpeed/Math.abs(ySpeed)) * rTrigger * DriveConstants.kBoostModifier;
+    }
+    
     rot = rotFilter.calculate(rot);
     ySpeed = ySpeedFilter.calculate(ySpeed);
     xSpeed = xSpeedFilter.calculate(xSpeed);
@@ -233,7 +241,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the robot's heading in degrees, from -180 to 180
    */
   public Rotation2d getHeading() {
-    return Rotation2d.fromDegrees(-1*m_gyro.getFusedHeading());
+    return Rotation2d.fromDegrees(-1 * m_gyro.getFusedHeading());
   }
 
   public void autoRotate(double xSpeed, double ySpeed, double desiredAngleRad, double rTrigger) {
@@ -261,10 +269,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   //Rotates all modules to point to center
   public void defence() {
-    m_frontLeft.setDesiredState(new SwerveModuleState(0, new Rotation2d(-Math.PI/4)));
-    m_frontRight.setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.PI/4)));
-    m_rearLeft.setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.PI/4)));
-    m_rearRight.setDesiredState(new SwerveModuleState(0, new Rotation2d(-Math.PI/4)));
+    m_frontLeft.setDefenseState(new SwerveModuleState(0, new Rotation2d(-Math.PI/4)));
+    m_frontRight.setDefenseState(new SwerveModuleState(0, new Rotation2d(Math.PI/4)));
+    m_rearLeft.setDefenseState(new SwerveModuleState(0, new Rotation2d(Math.PI/4)));
+    m_rearRight.setDefenseState(new SwerveModuleState(0, new Rotation2d(-Math.PI/4)));
   }
 
   //Changes brake mode of all modules
@@ -279,6 +287,14 @@ public class DriveSubsystem extends SubsystemBase {
     return -1* m_gyro.getRoll();
   }
 
+  public float getPitch() {
+    return m_gyro.getPitch();
+  }
+
+  public float getYaw() {
+    return m_gyro.getYaw();
+  }
+
   //Flips front of robot
   public void makeBackwards(boolean GOGOGOGOGOGOGO) {
     if (GOGOGOGOGOGOGO){
@@ -287,5 +303,7 @@ public class DriveSubsystem extends SubsystemBase {
       negate = 1;
     }
   }
+
+  
 
 }

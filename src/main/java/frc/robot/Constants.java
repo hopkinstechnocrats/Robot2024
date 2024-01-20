@@ -30,20 +30,20 @@ public final class Constants {
   }
 
   public static final class DriveConstants {
-    public static final int kFrontLeftDriveMotorPort = 1;
-    public static final int kRearLeftDriveMotorPort = 4;
-    public static final int kFrontRightDriveMotorPort = 2;
-    public static final int kRearRightDriveMotorPort = 3;
+    public static final int kFrontLeftDriveMotorPort = 4;
+    public static final int kRearLeftDriveMotorPort = 3;
+    public static final int kFrontRightDriveMotorPort = 1;
+    public static final int kRearRightDriveMotorPort = 2;
 
-    public static final int kFrontLeftTurningMotorPort = 5;
-    public static final int kRearLeftTurningMotorPort = 8;
-    public static final int kFrontRightTurningMotorPort = 6;
-    public static final int kRearRightTurningMotorPort = 7;
+    public static final int kFrontLeftTurningMotorPort = 8;
+    public static final int kRearLeftTurningMotorPort = 7;
+    public static final int kFrontRightTurningMotorPort = 5;
+    public static final int kRearRightTurningMotorPort = 6;
 
     public static final int kFrontLeftTurningEncoderPort = 2;
     public static final int kRearLeftTurningEncoderPort = 3;
-    public static final int kFrontRightTurningEncoderPort = 0;
-    public static final int kRearRightTurningEncoderPort = 1;
+    public static final int kFrontRightTurningEncoderPort = 1;
+    public static final int kRearRightTurningEncoderPort = 0;
 
     public static final boolean kFrontLeftTurningEncoderReversed = true;
     public static final boolean kRearLeftTurningEncoderReversed = false;
@@ -60,10 +60,12 @@ public final class Constants {
     public static final boolean kFrontRightDriveEncoderReversed = true;
     public static final boolean kRearRightDriveEncoderReversed = false;
 
-    public static final double kTrackWidth = 0.5;
+    public static final double kTrackWidth = 0.445;
     // Distance between centers of right and left wheels on robot
-    public static final double kWheelBase = 0.7;
+    public static final double kWheelBase = 0.495;
     // Distance between front and back wheels on robot
+    // Both in meters
+    
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
             new Translation2d(kWheelBase / 2, kTrackWidth / 2), //front left
@@ -95,10 +97,10 @@ public final class Constants {
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
       kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
-    public static final double kFrontRightOffset = 0.8934;
-    public static final double kFrontLeftOffset = 0.9793;
-    public static final double kRearRightOffset = 0.8768;
-    public static final double kRearLeftOffset = 0.3515;
+    public static final double kFrontRightOffset = 0.7284574431665793;
+    public static final double kFrontLeftOffset = 0.09268652376364071;
+    public static final double kRearRightOffset = 0.6394721317593424;
+    public static final double kRearLeftOffset = 0.620263356999417;
   }
 
   public static final class ModuleConstants {
@@ -107,8 +109,8 @@ public final class Constants {
     public static double kUModuleTurningController = 1.8;
     public static double kPModuleTurningController = .15*kUModuleTurningController;
     public static double tUModuleTurningController = .5; // Seconds
-    public static double kIModuleTurningController =0 * (.4*kUModuleTurningController)/tUModuleTurningController;
-    public static double kDModuleTurningController = 0 * 0.0666666666*kUModuleTurningController*tUModuleTurningController;
+    public static double kIModuleTurningController = 0*(.54*kUModuleTurningController)/tUModuleTurningController;
+    public static double kDModuleTurningController = 0*0.666666666*kUModuleTurningController*tUModuleTurningController;
 
     public static final double kPModuleDriveController = 0; // 0.15;
     public static final double kDModuleDriveController = 0;
@@ -122,6 +124,7 @@ public final class Constants {
     public static final double kSteerEncoderTicksPerRevolution = kfalconEncoderCPR * kSteeringGearRatio;
     public static final double kDriveEncoderTicksPerRevolution = kfalconEncoderCPR * kDriveGearRatio;
   }
+
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
