@@ -30,15 +30,15 @@ public final class Constants {
   }
 
   public static final class DriveConstants {
-    public static final int kFrontLeftDriveMotorPort = 4;
-    public static final int kRearLeftDriveMotorPort = 3;
-    public static final int kFrontRightDriveMotorPort = 1;
-    public static final int kRearRightDriveMotorPort = 2;
+    public static final int kFrontLeftDriveMotorPort = 6;
+    public static final int kRearLeftDriveMotorPort = 10;
+    public static final int kFrontRightDriveMotorPort = 8;
+    public static final int kRearRightDriveMotorPort = 12;
 
-    public static final int kFrontLeftTurningMotorPort = 8;
-    public static final int kRearLeftTurningMotorPort = 7;
-    public static final int kFrontRightTurningMotorPort = 5;
-    public static final int kRearRightTurningMotorPort = 6;
+    public static final int kFrontLeftTurningMotorPort = 7;
+    public static final int kRearLeftTurningMotorPort = 11;
+    public static final int kFrontRightTurningMotorPort = 9;
+    public static final int kRearRightTurningMotorPort = 13;
 
     public static final int kFrontLeftTurningEncoderPort = 2;
     public static final int kRearLeftTurningEncoderPort = 3;
@@ -97,10 +97,10 @@ public final class Constants {
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
       kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
-    public static final double kFrontRightOffset = 0.7284574431665793;
-    public static final double kFrontLeftOffset = 0.09268652376364071;
-    public static final double kRearRightOffset = 0.6394721317593424;
-    public static final double kRearLeftOffset = 0.620263356999417;
+    public static final double kFrontRightOffset = 0.5;
+    public static final double kFrontLeftOffset = 0.5;
+    public static final double kRearRightOffset = 0.5;
+    public static final double kRearLeftOffset = 0.5;
   }
 
   public static final class ModuleConstants {
@@ -144,5 +144,16 @@ public final class Constants {
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+  }
+
+  public static final class ClimbConstants{
+    //
+    public static final double climbMotorCANID = 7;
+    public static final double climbSpeed = 0;
+  }
+
+  public static final class IntakeConstants{
+    //public static final double intakeMotorCANID;
+    //public static final double intakeSpeed;
   }
 }
