@@ -197,9 +197,10 @@ public class DriveSubsystem extends SubsystemBase {
                       new ChassisSpeeds(xSpeed, ySpeed, rot));
     }
 
+    final double max_speed_per_wheel = DriveConstants.kMaxSpeedMetersPerSecond + rTrigger * (DriveConstants.kBoostModifier);
         //Desaturate = make sure speed for each module is achievable(Used to be called normalize)
     SwerveDriveKinematics.desaturateWheelSpeeds(
-        swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond + rTrigger * (DriveConstants.kBoostModifier));
+        swerveModuleStates, max_speed_per_wheel);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
     m_rearLeft.setDesiredState(swerveModuleStates[1]);
     m_frontRight.setDesiredState(swerveModuleStates[2]);

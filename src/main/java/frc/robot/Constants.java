@@ -88,7 +88,7 @@ public final class Constants {
     public static final double kMetersPerRevolution = kWheelHeight * Math.PI; // Circumfrence
 
     public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kBoostModifier = 1;
+    public static final double kBoostModifier = 0;
     
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
