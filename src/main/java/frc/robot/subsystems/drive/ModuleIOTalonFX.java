@@ -103,7 +103,7 @@ public class ModuleIOTalonFX implements ModuleIO {
     setDriveBrakeMode(true);
 
     var turnConfig = new TalonFXConfiguration();
-    turnConfig.CurrentLimits.StatorCurrentLimit = 30.0;
+    turnConfig.CurrentLimits.StatorCurrentLimit = 30.0;  //less current
     turnConfig.CurrentLimits.StatorCurrentLimitEnable = true;
     turnTalon.getConfigurator().apply(turnConfig);
     setTurnBrakeMode(true);
@@ -132,7 +132,7 @@ public class ModuleIOTalonFX implements ModuleIO {
     driveTalon.optimizeBusUtilization();
     turnTalon.optimizeBusUtilization();
   }
-
+// logging.  ignore
   @Override
   public void updateInputs(ModuleIOInputs inputs) {
     BaseStatusSignal.refreshAll(
