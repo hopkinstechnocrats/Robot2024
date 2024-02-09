@@ -30,6 +30,14 @@ public final class Constants {
     public static final int kFrontRightDriveMotorPort = 8;
     public static final int kRearRightDriveMotorPort = 12;
 
+    public static final double kDriveKP = 0;
+    public static final double kDriveKI = 0;
+    public static final double kDriveKD = 0;
+
+    public static final double kTurnKP = 0;
+    public static final double kTurnKI = 0;
+    public static final double kTurnKD = 0;
+
     public static final int kFrontLeftTurningMotorPort = 7;
     public static final int kRearLeftTurningMotorPort = 11;
     public static final int kFrontRightTurningMotorPort = 9;
@@ -45,7 +53,7 @@ public final class Constants {
     public static final double kRearRightOffset = 0.8732204457641093;
     public static final double kRearLeftOffset = 0.7323471197644466;
   }
-//dont worry about that
+  // dont worry about that
   public static enum Mode {
     /** Running on a real robot. */
     REAL,

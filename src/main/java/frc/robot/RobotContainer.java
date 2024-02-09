@@ -54,10 +54,10 @@ public class RobotContainer {
         drive =
             new Drive(
                 new GyroIONavX(),
-                new ModuleIOTalonFX(0),  //front left
-                new ModuleIOTalonFX(1),  //front right
-                new ModuleIOTalonFX(2),  //back left
-                new ModuleIOTalonFX(3)); //back right
+                new ModuleIOTalonFX(0), // front left
+                new ModuleIOTalonFX(1), // front right
+                new ModuleIOTalonFX(2), // back left
+                new ModuleIOTalonFX(3)); // back right
         break;
 
       case SIM:
@@ -93,7 +93,7 @@ public class RobotContainer {
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
     */
 
-    //things they had in.  we can change this
+    // things they had in.  we can change this
 
     autoChooser = new LoggedDashboardChooser<>("Auto Choices");
     // Set up SysId routines

@@ -21,11 +21,12 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import org.littletonrobotics.junction.Logger;
 
 public class Module {
-  private static final double WHEEL_RADIUS = Units.inchesToMeters(2.0);  //TODO check wheel radius
+  private static final double WHEEL_RADIUS = Units.inchesToMeters(2.0); // TODO check wheel radius
 
   private final ModuleIO io;
   private final ModuleIOInputsAutoLogged inputs = new ModuleIOInputsAutoLogged();
@@ -44,6 +45,13 @@ public class Module {
   public Module(ModuleIO io, int index) {
     this.io = io;
     this.index = index;
+    SmartDashboard.putNumber("Drive P", Constants.DriveConstants.kDriveKP);
+    SmartDashboard.putNumber("Drive I", Constants.DriveConstants.kDriveKI);
+    SmartDashboard.putNumber("Drive D", Constants.DriveConstants.kDriveKD);
+
+    SmartDashboard.putNumber("Turn P", Constants.DriveConstants.kTurnKP);
+    SmartDashboard.putNumber("Turn I", Constants.DriveConstants.kTurnKI);
+    SmartDashboard.putNumber("Turn D", Constants.DriveConstants.kTurnKD);
 
     // Switch constants based on mode (the physics simulator is treated as a
     // separate robot with different tuning)
@@ -125,6 +133,16 @@ public class Module {
     // Open loop drive control
     io.setDriveVoltage(volts);
     speedSetpoint = null;
+  }
+
+  public void syncPIDGains() {
+    driveFeedback.setP(SmartDashboard.getNumber("Drive P", 0));
+    driveFeedback.setI(SmartDashboard.getNumber("Drive I", 0));
+    driveFeedback.setD(SmartDashboard.getNumber("Drive D", 0));
+
+    turnFeedback.setP(SmartDashboard.getNumber("Turn P", 0));
+    turnFeedback.setI(SmartDashboard.getNumber("Turn I", 0));
+    turnFeedback.setD(SmartDashboard.getNumber("Turn D", 0));
   }
 
   /** Disables all outputs to motors. */
