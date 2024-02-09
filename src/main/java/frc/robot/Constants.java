@@ -45,7 +45,7 @@ public final class Constants {
     public static final double kRearRightOffset = 0.8732204457641093;
     public static final double kRearLeftOffset = 0.7323471197644466;
   }
-//dont worry about that
+  // dont worry about that
   public static enum Mode {
     /** Running on a real robot. */
     REAL,
