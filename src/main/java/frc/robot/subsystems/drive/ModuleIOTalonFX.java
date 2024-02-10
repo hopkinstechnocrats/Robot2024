@@ -65,29 +65,37 @@ public class ModuleIOTalonFX implements ModuleIO {
     switch (index) {
         // FL,FR,BL,BR
       case 0:
-        driveTalon = new TalonFX(Constants.DriveConstants.kFrontLeftDriveMotorPort);
-        turnTalon = new TalonFX(Constants.DriveConstants.kFrontLeftTurningMotorPort);
+        driveTalon =
+            new TalonFX(Constants.DriveConstants.kFrontLeftDriveMotorPort, "Getrude Greyser");
+        turnTalon =
+            new TalonFX(Constants.DriveConstants.kFrontLeftTurningMotorPort, "Getrude Greyser");
         encoder = new AnalogEncoder(Constants.DriveConstants.kFrontLeftTurningEncoderPort);
         absoluteEncoderOffset =
             new Rotation2d(Constants.DriveConstants.kFrontLeftOffset); // MUST BE CALIBRATED
         break;
       case 1:
-        driveTalon = new TalonFX(Constants.DriveConstants.kFrontRightDriveMotorPort);
-        turnTalon = new TalonFX(Constants.DriveConstants.kFrontRightTurningMotorPort);
+        driveTalon =
+            new TalonFX(Constants.DriveConstants.kFrontRightDriveMotorPort, "Getrude Greyser");
+        turnTalon =
+            new TalonFX(Constants.DriveConstants.kFrontRightTurningMotorPort, "Getrude Greyser");
         encoder = new AnalogEncoder(Constants.DriveConstants.kFrontRightTurningEncoderPort);
         absoluteEncoderOffset =
             new Rotation2d(Constants.DriveConstants.kFrontRightOffset); // MUST BE CALIBRATED
         break;
       case 2:
-        driveTalon = new TalonFX(Constants.DriveConstants.kRearLeftDriveMotorPort);
-        turnTalon = new TalonFX(Constants.DriveConstants.kRearLeftTurningMotorPort);
+        driveTalon =
+            new TalonFX(Constants.DriveConstants.kRearLeftDriveMotorPort, "Getrude Greyser");
+        turnTalon =
+            new TalonFX(Constants.DriveConstants.kRearLeftTurningMotorPort, "Getrude Greyser");
         encoder = new AnalogEncoder(Constants.DriveConstants.kRearLeftTurningEncoderPort);
         absoluteEncoderOffset =
             new Rotation2d(Constants.DriveConstants.kRearLeftOffset); // MUST BE CALIBRATED
         break;
       case 3:
-        driveTalon = new TalonFX(Constants.DriveConstants.kRearRightDriveMotorPort);
-        turnTalon = new TalonFX(Constants.DriveConstants.kRearRightTurningMotorPort);
+        driveTalon =
+            new TalonFX(Constants.DriveConstants.kRearRightDriveMotorPort, "Getrude Greyser");
+        turnTalon =
+            new TalonFX(Constants.DriveConstants.kRearRightTurningMotorPort, "Getrude Greyser");
         encoder = new AnalogEncoder(Constants.DriveConstants.kRearRightTurningEncoderPort);
         absoluteEncoderOffset =
             new Rotation2d(Constants.DriveConstants.kRearRightOffset); // MUST BE CALIBRATED
