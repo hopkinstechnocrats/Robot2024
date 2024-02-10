@@ -10,5 +10,6 @@ public class GyroIONavX implements GyroIO {
 
   public void updateInputs(GyroIOInputs inputs) {
     inputs.yawPosition = Rotation2d.fromDegrees(yaw);
+    inputs.connected = m_gyro.isConnected();
   }
 }
