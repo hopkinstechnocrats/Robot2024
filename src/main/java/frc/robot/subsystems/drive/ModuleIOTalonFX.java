@@ -161,7 +161,8 @@ public class ModuleIOTalonFX implements ModuleIO {
     inputs.driveCurrentAmps = new double[] {driveCurrent.getValueAsDouble()};
 
     inputs.turnAbsolutePosition =
-        Rotation2d.fromRotations(turnAbsolutePosition).minus(absoluteEncoderOffset);
+        Rotation2d.fromRadians(turnAbsolutePosition).minus(absoluteEncoderOffset);
+    System.out.println(turnAbsolutePosition); // TODO delete after testing
     inputs.turnPosition =
         Rotation2d.fromRotations(turnPosition.getValueAsDouble() / TURN_GEAR_RATIO);
     inputs.turnVelocityRadPerSec =

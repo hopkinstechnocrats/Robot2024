@@ -51,9 +51,9 @@ public class Module {
   private double m_turnKD = SmartDashboard.getNumber("Turn P", Constants.DriveConstants.kTurnKD);
 
   private double m_driveFFKS =
-      SmartDashboard.getNumber("Drive Feed Forward Static Gain", 0.1); // TODO create constant
+      SmartDashboard.getNumber("Turn Feed Forward Static Gain", 0.1); // TODO create constant
   private double m_driveFFKv =
-      SmartDashboard.getNumber("Drive Feed Forward Velocity Gain", 0.13); // TODO create constant
+      SmartDashboard.getNumber("Turn Feed Forward Velocity Gain", 0.13); // TODO create constant
 
   public Module(ModuleIO io, int index) {
     this.io = io;
