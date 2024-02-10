@@ -42,35 +42,41 @@ public class Module {
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("Module");
 
+  private double m_driveKP = SmartDashboard.getNumber("Drive P", Constants.DriveConstants.kDriveKP);
+  private double m_driveKI = SmartDashboard.getNumber("Drive I", Constants.DriveConstants.kDriveKI);
+  private double m_driveKD = SmartDashboard.getNumber("Drive D", Constants.DriveConstants.kDriveKD);
+
+  private double m_turnKP = SmartDashboard.getNumber("Turn P", Constants.DriveConstants.kTurnKP);
+  private double m_turnKI = SmartDashboard.getNumber("Turn P", Constants.DriveConstants.kTurnKI);
+  private double m_turnKD = SmartDashboard.getNumber("Turn P", Constants.DriveConstants.kTurnKD);
+
+  private double m_driveFFKS =
+      SmartDashboard.getNumber("Drive Feed Forward Static Gain", 0.1); // TODO create constant
+  private double m_driveFFKv =
+      SmartDashboard.getNumber("Drive Feed Forward Velocity Gain", 0.13); // TODO create constant
+
   public Module(ModuleIO io, int index) {
     this.io = io;
     this.index = index;
-    SmartDashboard.putNumber("Drive P", Constants.DriveConstants.kDriveKP);
-    SmartDashboard.putNumber("Drive I", Constants.DriveConstants.kDriveKI);
-    SmartDashboard.putNumber("Drive D", Constants.DriveConstants.kDriveKD);
-
-    SmartDashboard.putNumber("Turn P", Constants.DriveConstants.kTurnKP);
-    SmartDashboard.putNumber("Turn I", Constants.DriveConstants.kTurnKI);
-    SmartDashboard.putNumber("Turn D", Constants.DriveConstants.kTurnKD);
 
     // Switch constants based on mode (the physics simulator is treated as a
     // separate robot with different tuning)
     switch (Constants.currentMode) {
       case REAL:
       case REPLAY:
-        driveFeedforward = new SimpleMotorFeedforward(0.1, 0.13);
-        driveFeedback = new PIDController(0.05, 0.0, 0.0);
-        turnFeedback = new PIDController(7.0, 0.0, 0.0);
+        driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
+        driveFeedback = new PIDController(m_driveKP, m_driveKI, m_driveKD);
+        turnFeedback = new PIDController(m_turnKP, m_turnKI, m_turnKD);
         break;
       case SIM:
-        driveFeedforward = new SimpleMotorFeedforward(0.0, 0.13);
-        driveFeedback = new PIDController(0.1, 0.0, 0.0);
-        turnFeedback = new PIDController(10.0, 0.0, 0.0);
+        driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
+        driveFeedback = new PIDController(m_driveKP, m_driveKI, m_driveKD);
+        turnFeedback = new PIDController(m_turnKP, m_turnKI, m_turnKD);
         break;
       default:
-        driveFeedforward = new SimpleMotorFeedforward(0.0, 0.0);
-        driveFeedback = new PIDController(0.0, 0.0, 0.0);
-        turnFeedback = new PIDController(0.0, 0.0, 0.0);
+        driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
+        driveFeedback = new PIDController(m_driveKP, m_driveKI, m_driveKD);
+        turnFeedback = new PIDController(m_turnKP, m_turnKI, m_turnKD);
         break;
     }
 
