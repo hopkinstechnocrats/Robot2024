@@ -48,7 +48,7 @@ public class ModuleIOTalonFX implements ModuleIO {
   private final StatusSignal<Double> driveAppliedVolts;
   private final StatusSignal<Double> driveCurrent;
 
-  private final Double turnAbsolutePosition;
+  //private final Double turnAbsolutePosition;
   private final StatusSignal<Double> turnPosition;
   private final StatusSignal<Double> turnVelocity;
   private final StatusSignal<Double> turnAppliedVolts;
@@ -121,7 +121,7 @@ public class ModuleIOTalonFX implements ModuleIO {
     driveAppliedVolts = driveTalon.getMotorVoltage();
     driveCurrent = driveTalon.getStatorCurrent();
 
-    turnAbsolutePosition = encoder.getAbsolutePosition();
+    //turnAbsolutePosition = encoder.getAbsolutePosition();
     turnPosition = turnTalon.getPosition();
     turnVelocity = turnTalon.getVelocity();
     turnAppliedVolts = turnTalon.getMotorVoltage();
@@ -162,7 +162,6 @@ public class ModuleIOTalonFX implements ModuleIO {
 
     inputs.turnAbsolutePosition =
         Rotation2d.fromRadians(encoder.getAbsolutePosition()).minus(absoluteEncoderOffset);
-    System.out.println(turnAbsolutePosition); // TODO delete after testing
     inputs.turnPosition =
         Rotation2d.fromRotations(turnPosition.getValueAsDouble() / TURN_GEAR_RATIO);
     inputs.turnVelocityRadPerSec =
