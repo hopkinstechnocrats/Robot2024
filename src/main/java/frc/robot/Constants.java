@@ -31,7 +31,7 @@ public final class Constants {
     public static final int kFrontRightDriveMotorPort = 8;
     public static final int kRearRightDriveMotorPort = 12;
 
-    public static final double kDriveKP = 0.065; // was 0.085
+    public static final double kDriveKP = 0.05; // good number
     public static final double kDriveKI = 0;
     public static final double kDriveKD = 0;
 
