@@ -30,11 +30,11 @@ public final class Constants {
     public static final int kFrontRightDriveMotorPort = 8;
     public static final int kRearRightDriveMotorPort = 12;
 
-    public static final double kDriveKP = .1;
+    public static final double kDriveKP = 0.1;
     public static final double kDriveKI = 0;
     public static final double kDriveKD = 0;
 
-    public static final double kTurnKP = 0.1;
+    public static final double kTurnKP = 0.5; // was 1
     public static final double kTurnKI = 0;
     public static final double kTurnKD = 0;
 
@@ -48,10 +48,10 @@ public final class Constants {
     public static final int kFrontRightTurningEncoderPort = 1;
     public static final int kRearRightTurningEncoderPort = 0;
 
-    public static final double kFrontRightOffset = 0.8512404586715543;
-    public static final double kFrontLeftOffset = 0.6399792730535301;
-    public static final double kRearRightOffset = 0.8732204457641093;
-    public static final double kRearLeftOffset = 0.7323471197644466;
+    public static final double kFrontRightOffset = 0;
+    public static final double kFrontLeftOffset = 0;
+    public static final double kRearRightOffset = 0;
+    public static final double kRearLeftOffset = 0;
   }
   // dont worry about that
   public static enum Mode {
