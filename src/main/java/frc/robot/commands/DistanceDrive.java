@@ -4,6 +4,9 @@ package frc.robot.commands;
 getSelectedSensorposition() * DriveConstants.kEncoderDistancePerPulse;
 */
 
+// for future notice:
+// https://github.com/BobcatRobotics/2023-ChargedUp-177/blob/721865361117aad82912a9a9032b085bc71f645d/src/main/java/frc/robot/SwerveModule.java
+
 /*public class DistanceDrive {
 
    public DistanceDrive() {}
