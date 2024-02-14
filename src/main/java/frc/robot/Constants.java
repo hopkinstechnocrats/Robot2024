@@ -23,6 +23,7 @@ package frc.robot;
  */
 public final class Constants {
   public static final Mode currentMode = Mode.REAL;
+  public static final boolean tuningMode = true;
 
   public static final class DriveConstants {
     public static final int kFrontLeftDriveMotorPort = 6;
@@ -48,10 +49,10 @@ public final class Constants {
     public static final int kFrontRightTurningEncoderPort = 1;
     public static final int kRearRightTurningEncoderPort = 0;
 
-    public static final double kFrontRightOffset = 0.5046380758756043;
-    public static final double kFrontLeftOffset = 0.6419277889797301;
-    public static final double kRearRightOffset = 0.49709956856856613;
-    public static final double kRearLeftOffset = 0.7301865723975614;
+    public static final double kFrontRightOffset = 0;
+    public static final double kFrontLeftOffset = 0;
+    public static final double kRearRightOffset = 0;
+    public static final double kRearLeftOffset = 0;
   }
   // dont worry about that
   public static enum Mode {

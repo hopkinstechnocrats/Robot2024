@@ -23,6 +23,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+import frc.robot.util.TunableNumber;
 import org.littletonrobotics.junction.Logger;
 
 public class Module {
@@ -42,13 +43,13 @@ public class Module {
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("Module");
 
-  private double m_driveKP = SmartDashboard.getNumber("Drive P", Constants.DriveConstants.kDriveKP);
-  private double m_driveKI = SmartDashboard.getNumber("Drive I", Constants.DriveConstants.kDriveKI);
-  private double m_driveKD = SmartDashboard.getNumber("Drive D", Constants.DriveConstants.kDriveKD);
+  public TunableNumber m_driveKP = new TunableNumber("Drive P");
+  public TunableNumber m_driveKI = new TunableNumber("Drive I");
+  public TunableNumber m_driveKD = new TunableNumber("Drive D");
 
-  private double m_turnKP = SmartDashboard.getNumber("Turn P", Constants.DriveConstants.kTurnKP);
-  private double m_turnKI = SmartDashboard.getNumber("Turn P", Constants.DriveConstants.kTurnKI);
-  private double m_turnKD = SmartDashboard.getNumber("Turn P", Constants.DriveConstants.kTurnKD);
+  private TunableNumber m_turnKP = new TunableNumber("Turn P");
+  private TunableNumber m_turnKI = new TunableNumber("Turn I");
+  private TunableNumber m_turnKD = new TunableNumber("Turn D");
 
   private double m_driveFFKS =
       SmartDashboard.getNumber("Turn Feed Forward Static Gain", 0.1); // TODO create constant
@@ -59,24 +60,32 @@ public class Module {
     this.io = io;
     this.index = index;
 
+    m_driveKP.setDefault(Constants.DriveConstants.kDriveKP);
+    m_driveKI.setDefault(Constants.DriveConstants.kDriveKI);
+    m_driveKD.setDefault(Constants.DriveConstants.kDriveKD);
+
+    m_turnKP.setDefault(Constants.DriveConstants.kTurnKP);
+    m_turnKI.setDefault(Constants.DriveConstants.kTurnKI);
+    m_turnKD.setDefault(Constants.DriveConstants.kTurnKD);
+
     // Switch constants based on mode (the physics simulator is treated as a
     // separate robot with different tuning)
     switch (Constants.currentMode) {
       case REAL:
       case REPLAY:
         driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
-        driveFeedback = new PIDController(m_driveKP, m_driveKI, m_driveKD);
-        turnFeedback = new PIDController(m_turnKP, m_turnKI, m_turnKD);
+        driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
+        turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
         break;
       case SIM:
         driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
-        driveFeedback = new PIDController(m_driveKP, m_driveKI, m_driveKD);
-        turnFeedback = new PIDController(m_turnKP, m_turnKI, m_turnKD);
+        driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
+        turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
         break;
       default:
         driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
-        driveFeedback = new PIDController(m_driveKP, m_driveKI, m_driveKD);
-        turnFeedback = new PIDController(m_turnKP, m_turnKI, m_turnKD);
+        driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
+        turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
         break;
     }
 
