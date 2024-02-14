@@ -97,6 +97,14 @@ public class Module {
     io.updateInputs(inputs);
     Logger.processInputs("Drive/Module" + Integer.toString(index), inputs);
 
+    m_driveKP.get();
+    m_driveKI.get();
+    m_driveKD.get();
+
+    m_turnKP.get();
+    m_turnKI.get();
+    m_turnKD.get();
+
     // On first cycle, reset relative turn encoder
     // Wait until absolute angle is nonzero in case it wasn't initialized yet
     if (turnRelativeOffset == null && inputs.turnAbsolutePosition.getRadians() != 0.0) {
