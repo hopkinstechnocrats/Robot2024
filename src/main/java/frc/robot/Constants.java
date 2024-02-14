@@ -24,6 +24,11 @@ package frc.robot;
 public final class Constants {
   public static final Mode currentMode = Mode.REAL;
 
+  public static final double kWheelDiameterMeters = 0.1016; // 4 inches in meters
+  public static final double kEncoderCPR = 2048;
+  public static final double kEncoderDistancePerPulse =
+      (kWheelDiameterMeters * Math.PI) / kEncoderCPR;
+
   public static final class DriveConstants {
     public static final int kFrontLeftDriveMotorPort = 6;
     public static final int kRearLeftDriveMotorPort = 10;
