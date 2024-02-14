@@ -33,9 +33,9 @@ public class Module {
   private final ModuleIOInputsAutoLogged inputs = new ModuleIOInputsAutoLogged();
   private final int index;
 
-  private final SimpleMotorFeedforward driveFeedforward;
-  private final PIDController driveFeedback;
-  private final PIDController turnFeedback;
+  private SimpleMotorFeedforward driveFeedforward; // TODO change back to final
+  private PIDController driveFeedback; // TODO change back to final
+  private PIDController turnFeedback; // TODO change back to final
   private Rotation2d angleSetpoint = null; // Setpoint for closed loop control, null for open loop
   private Double speedSetpoint = null; // Setpoint for closed loop control, null for open loop
   private Rotation2d turnRelativeOffset = null; // Relative + Offset = Absolute
@@ -97,13 +97,9 @@ public class Module {
     io.updateInputs(inputs);
     Logger.processInputs("Drive/Module" + Integer.toString(index), inputs);
 
-    m_driveKP.get();
-    m_driveKI.get();
-    m_driveKD.get();
-
-    m_turnKP.get();
-    m_turnKI.get();
-    m_turnKD.get();
+    driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
+    driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
+    turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
 
     // On first cycle, reset relative turn encoder
     // Wait until absolute angle is nonzero in case it wasn't initialized yet
