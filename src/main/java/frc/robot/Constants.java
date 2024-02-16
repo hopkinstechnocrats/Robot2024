@@ -46,14 +46,25 @@ public final class Constants {
 
     public static final int kFrontLeftTurningEncoderPort = 2;
     public static final int kRearLeftTurningEncoderPort = 3;
-    public static final int kFrontRightTurningEncoderPort = 1;
-    public static final int kRearRightTurningEncoderPort = 0;
+    public static final int kFrontRightTurningEncoderPort = 0;
+    public static final int kRearRightTurningEncoderPort = 1;
 
-    public static final double kFrontRightOffset = 0.5046380758756043;
-    public static final double kFrontLeftOffset = 0.6419277889797301;
-    public static final double kRearRightOffset = 0.49709956856856613;
-    public static final double kRearLeftOffset = 0.7301865723975614;
+    public static final double kFrontRightOffset = -0.6368135939245309; // .5046380758756043
+    public static final double kFrontLeftOffset = 3.7817330629130574; // .6419277889797301
+    public static final double kRearRightOffset = 0.23551718363337543; // .49709956856856613
+    public static final double kRearLeftOffset = 3.5254560059502964; // .7301865723975614
   }
+
+  /* Turn position 0 = 0.6368135939245309
+  turn Absolute position 0 = 0.1098125713354401
+  Turn position 1 = -3.7817330629130574
+  turn Absolute position 1 = 0.8739513170306402
+  Turn position 2 = -0.23551718363337543
+  turn Absolute position 2 = 0.7294455170128549
+  Turn position 3 = -3.5254560059502964
+  turn Absolute position 3 = -0.23551718363337543
+  */
+
   // dont worry about that
   public static enum Mode {
     /** Running on a real robot. */
