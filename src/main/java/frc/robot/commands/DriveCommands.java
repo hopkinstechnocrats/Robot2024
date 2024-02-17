@@ -95,6 +95,7 @@ public class DriveCommands {
 
 
   public static Command VisionDrive(
+    Drive drive,
     double driveforward,
     double turnrate
      ) 
@@ -141,7 +142,9 @@ public class DriveCommands {
       if(turnrate >  speedCap){turnrate =  speedCap;}
       if(turnrate < -speedCap){turnrate = -speedCap;}
       //can't be arcade drive, need to create a method for driving a distance
-      drive.arcadeDrive(driveforward, turnrate);
+      
+      drive.XXXX;
+    
     }else{
 
     }
