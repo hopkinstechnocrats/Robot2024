@@ -13,6 +13,7 @@
 
 package frc.robot.commands;
 
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -27,26 +28,21 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.PhotonVision;
-
 import java.util.function.DoubleSupplier;
-
-import com.kauailabs.navx.frc.AHRS;
 
 public class DriveCommands {
   private static final double DEADBAND = 0.1;
   static PhotonVision m_PhotonVision = new PhotonVision();
-  
-  private static double m_yawCurrent = 0.0; ///!< From NavX
-  private static double m_yawTarget = 0.0; ///!< From apriltag
-  private static double m_depthCurrent = 0.0; ///!< From NavX
-  private static double m_depthTarget; ///!< From apriltag
-  private static boolean m_haveTarget = false; ///!< Have we seen an april tag lately
+
+  private static double m_yawCurrent = 0.0; // /!< From NavX
+  private static double m_yawTarget = 0.0; // /!< From apriltag
+  private static double m_depthCurrent = 0.0; // /!< From NavX
+  private static double m_depthTarget; // /!< From apriltag
+  private static boolean m_haveTarget = false; // /!< Have we seen an april tag lately
   static AHRS ahrs;
 
-
-
   private DriveCommands() {
-     ahrs = new AHRS(SPI.Port.kMXP);
+    ahrs = new AHRS(SPI.Port.kMXP);
   }
 
   /**
@@ -90,39 +86,33 @@ public class DriveCommands {
                       ? drive.getRotation().plus(new Rotation2d(Math.PI))
                       : drive.getRotation()));
         },
-        drive);}
+        drive);
+  }
 
+  public static Command VisionDrive(Drive drive, double driveforward, double turnrate) {
 
-
-  public static Command VisionDrive(
-    Drive drive,
-    double driveforward,
-    double turnrate
-     ) 
-  
-  {
-    //x for april tag is equal to y for navx.
+    // x for april tag is equal to y for navx.
     Transform3d Actual_TF = m_PhotonVision.GetCamData();
     double x_actual = Actual_TF.getX();
     double y_actual = Actual_TF.getY();
     double z_actual = Actual_TF.getZ();
     double kp_x = 1.0;
     double kp_y = 10.0;
-    //use wheel encoders?? using navx for now.
+    // use wheel encoders?? using navx for now.
     m_yawCurrent = Math.toRadians(ahrs.getAngle());
     m_depthCurrent = ahrs.getDisplacementY();
 
     boolean haveNewData = x_actual != 0 && y_actual != 0;
-    
-    if (haveNewData){
+
+    if (haveNewData) {
       m_haveTarget = true;
       m_yawTarget = m_yawCurrent + Math.atan2(y_actual, x_actual);
       m_depthTarget = m_depthCurrent + x_actual;
 
       System.out.println(m_yawCurrent);
       System.out.println(m_depthCurrent);
-      
-      //wait
+
+      // wait
       try {
         Thread.sleep(100);
       } catch (InterruptedException e) {
@@ -133,24 +123,23 @@ public class DriveCommands {
       // TODO: If it's been too long since we saw anything, maybe give up?
       System.out.println("no april tag seen!");
     }
-    
-    if(m_haveTarget || true)
-    {
+
+    if (m_haveTarget || true) {
       final double speedCap = 0.5;
-      driveforward = (m_depthCurrent - m_depthTarget)*kp_x;
-      turnrate = (m_yawCurrent - m_yawTarget)*kp_y;
-      if(turnrate >  speedCap){turnrate =  speedCap;}
-      if(turnrate < -speedCap){turnrate = -speedCap;}
-      //can't be arcade drive, need to create a method for driving a distance
-      
-      drive.XXXX;
-    
-    }else{
+      driveforward = (m_depthCurrent - m_depthTarget) * kp_x;
+      turnrate = (m_yawCurrent - m_yawTarget) * kp_y;
+      if (turnrate > speedCap) {
+        turnrate = speedCap;
+      }
+      if (turnrate < -speedCap) {
+        turnrate = -speedCap;
+      }
+      // can't be arcade drive, need to create a method for driving a distance
+
+    } else {
 
     }
-   
-   
-    return null;
 
+    return null;
   }
 }
