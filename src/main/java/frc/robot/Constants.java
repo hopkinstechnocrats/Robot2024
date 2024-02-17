@@ -31,11 +31,11 @@ public final class Constants {
     public static final int kFrontRightDriveMotorPort = 8;
     public static final int kRearRightDriveMotorPort = 12;
 
-    public static final double kDriveKP = 0.05; // good number
-    public static final double kDriveKI = 0;
+    public static final double kDriveKP = 0.1; // good number
+    public static final double kDriveKI = 0.01;
     public static final double kDriveKD = 0;
 
-    public static final double kTurnKP = 0; // was .5
+    public static final double kTurnKP = 1;
     public static final double kTurnKI = 0;
     public static final double kTurnKD = 0;
 
@@ -49,20 +49,25 @@ public final class Constants {
     public static final int kFrontRightTurningEncoderPort = 0;
     public static final int kRearRightTurningEncoderPort = 1;
 
-    public static final double kFrontRightOffset = -0.6368135939245309; // .5046380758756043
-    public static final double kFrontLeftOffset = 3.7817330629130574; // .6419277889797301
-    public static final double kRearRightOffset = 0.23551718363337543; // .49709956856856613
-    public static final double kRearLeftOffset = 3.5254560059502964; // .7301865723975614
+    // rotations
+    public static final double kFrontRightOffset =
+        2.1992729427258633; // 0.00024970629629424693, .8477700479390661
+    public static final double kFrontLeftOffset =
+        0.8831237151806749; // -2.644633793774256, 0.1435600110325262
+    public static final double kRearRightOffset =
+        0.7950913583590834; // -0.5059047939851695, .8759384494153275
+    public static final double kRearLeftOffset =
+        1.4449704373167107; // -2.641448463258407. .2315244928355887
   }
 
-  /* Turn position 0 = 0.6368135939245309
-  turn Absolute position 0 = 0.1098125713354401
-  Turn position 1 = -3.7817330629130574
-  turn Absolute position 1 = 0.8739513170306402
-  Turn position 2 = -0.23551718363337543
-  turn Absolute position 2 = 0.7294455170128549
-  Turn position 3 = -3.5254560059502964
-  turn Absolute position 3 = -0.23551718363337543
+  /* Turn position 0 = -0.09177295726990496
+  turn Absolute position 0 = 2.784981618673524
+  Turn position 1 = 2.9708094592051917
+  turn Absolute position 1 = 0.35012567346983686
+  Turn position 2 = 3.0972299292041408
+  turn Absolute position 2 = 2.8707491349248175
+  Turn position 3 = -1.0753614384621781
+  turn Absolute position 3 = 0.8750591080688083
   */
 
   // dont worry about that
