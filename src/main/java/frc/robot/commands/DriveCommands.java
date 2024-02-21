@@ -14,6 +14,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
@@ -28,6 +29,7 @@ import java.util.function.DoubleSupplier;
 
 public class DriveCommands {
   private static final double DEADBAND = 0.05; // TODO halved
+  private static final SlewRateLimiter speedFilter = new SlewRateLimiter(5);
 
   private DriveCommands() {}
 
@@ -42,11 +44,14 @@ public class DriveCommands {
     return Commands.run(
         () -> {
           // Apply deadband
+          double xAxisPosition = xSupplier.getAsDouble();
+          double yAxisPosition = ySupplier.getAsDouble();
+          xAxisPosition = speedFilter.calculate(xAxisPosition);
+          yAxisPosition = speedFilter.calculate(yAxisPosition);
+
           double linearMagnitude =
-              MathUtil.applyDeadband(
-                  Math.hypot(xSupplier.getAsDouble(), ySupplier.getAsDouble()), DEADBAND);
-          Rotation2d linearDirection =
-              new Rotation2d(xSupplier.getAsDouble(), ySupplier.getAsDouble());
+              MathUtil.applyDeadband(Math.hypot(xAxisPosition, yAxisPosition), DEADBAND);
+          Rotation2d linearDirection = new Rotation2d(xAxisPosition, yAxisPosition);
           double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);
 
           // Square values
