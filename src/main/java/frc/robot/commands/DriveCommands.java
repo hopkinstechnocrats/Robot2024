@@ -74,4 +74,12 @@ public class DriveCommands {
         },
         drive);
   }
+
+  public static Command DistanceDrive(Drive drive, double x_distance, double y_distance) {
+    return Commands.run(
+        () -> {
+          drive.distanceDrive(x_distance, y_distance);
+        },
+        drive);
+  }
 }

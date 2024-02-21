@@ -64,6 +64,8 @@ public class Drive extends SubsystemBase {
   private SwerveDrivePoseEstimator poseEstimator =
       new SwerveDrivePoseEstimator(kinematics, rawGyroRotation, lastModulePositions, new Pose2d());
 
+  Module m_module;
+
   public Drive(
       GyroIO gyroIO,
       ModuleIO flModuleIO,
@@ -183,6 +185,22 @@ public class Drive extends SubsystemBase {
     // Log setpoint states
     Logger.recordOutput("SwerveStates/Setpoints", setpointStates);
     Logger.recordOutput("SwerveStates/SetpointsOptimized", optimizedSetpointStates);
+  }
+
+  public void distanceDrive(double x_distance, double y_distance) {
+
+    double positionMeters = m_module.getPositionMeters(); // drive encoder
+    Rotation2d rotationRadians = m_module.getAngle(); // turn encoder
+    // double rotationRadiansDouble = rotationRadians.getRadians();
+
+    double y_distance_moved = positionMeters * rotationRadians.getSin();
+    double x_distance_moved = positionMeters * rotationRadians.getCos();
+
+    x_distance = x_distance_moved;
+    y_distance = y_distance_moved;
+
+    System.out.println(x_distance_moved);
+    System.out.println(y_distance_moved);
   }
 
   /** Stops the drive. */

@@ -39,11 +39,13 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
+  private double x_distance;
+  private double y_distance;
   // private final DistanceDrive distanceDrive;
 
   // Controller
-  private final CommandXboxController controller = new CommandXboxController(0);
-  private final CommandXboxController OperatorController = new CommandXboxController(1);
+  private final CommandXboxController driverController = new CommandXboxController(0);
+  private final CommandXboxController operatorController = new CommandXboxController(1);
 
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
@@ -121,11 +123,12 @@ public class RobotContainer {
     drive.setDefaultCommand(
         DriveCommands.joystickDrive(
             drive,
-            () -> -controller.getLeftY(),
-            () -> -controller.getLeftX(),
-            () -> -controller.getRightX()));
-    controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
-    controller
+            () -> -driverController.getLeftY(),
+            () -> -driverController.getLeftX(),
+            () -> -driverController.getRightX()));
+
+    driverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
+    driverController
         .b()
         .onTrue(
             Commands.runOnce(
@@ -134,7 +137,17 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
-    // OperatorController.a().onTrue(Commands.runOnce(distanceDrive(drive, Module), drive));
+
+    DriveCommands.DistanceDrive(drive, x_distance, y_distance);
+    operatorController
+        .a()
+        .onTrue(
+            Commands.runOnce(
+                    () ->
+                        drive.setPose(
+                            new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
+                    drive)
+                .ignoringDisable(false));
   }
 
   /**
