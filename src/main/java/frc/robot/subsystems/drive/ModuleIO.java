@@ -45,4 +45,27 @@ public interface ModuleIO {
 
   /** Enable or disable brake mode on the turn motor. */
   public default void setTurnBrakeMode(boolean enable) {}
+
+  /** Run drive motor at volts */
+  default void runDriveVolts(double volts) {}
+
+  /** Run turn motor at volts */
+  default void runTurnVolts(double volts) {}
+
+  /** Run drive motor at current */
+  default void runDriveCurrent(double current) {}
+
+  /** Run turn motor at current */
+  default void runTurnCurrent(double current) {}
+
+  /** Run to drive velocity setpoint with feedforward */
+  default void runDriveVelocitySetpoint(double velocityRadsPerSec, double feedForward) {}
+
+  /** Run to turn position setpoint */
+  default void runTurnPositionSetpoint(double angleRads) {}
+
+  default void setDrivePID(double kP, double kI, double kD) {}
+
+  /** Configure turn PID */
+  default void setTurnPID(double kP, double kI, double kD) {}
 }

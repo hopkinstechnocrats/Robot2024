@@ -83,6 +83,8 @@ public class Module {
         turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
         break;
       default:
+        io.setTurnPID(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
+        io.setDrivePID(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
         driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
         driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
         turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
