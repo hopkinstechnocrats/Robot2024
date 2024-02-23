@@ -56,9 +56,9 @@ public class ModuleIOTalonFX implements ModuleIO {
 
   // Gear ratios for SDS MK4i L2, adjust as necessary
   private final double DRIVE_GEAR_RATIO = (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0);
-  private final double TURN_GEAR_RATIO = 150.0 / 7.0;
+  private final double TURN_GEAR_RATIO = 12.8 / 1.0; // From mk4 datasheet
 
-  private final boolean isTurnMotorInverted = false; // TODO flipped
+  private final boolean isTurnMotorInverted = true;
   private final Rotation2d absoluteEncoderOffset;
 
   public ModuleIOTalonFX(int index) {
