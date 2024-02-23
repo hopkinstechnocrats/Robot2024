@@ -42,13 +42,11 @@ public class EndEffector {
   }
 
   public void spinEndEffectorIn() {
-    spin(EndEffectorConstants.kRollersSpeedIn);
-    spin(EndEffectorConstants.kBlueWheelSpeedIn);
+    spin(EndEffectorConstants.EndEffectorSpeedIn);
   }
 
   public void spinEndEffectorOut() {
-    spin(EndEffectorConstants.kRollersSpeedOut);
-    spin(EndEffectorConstants.kRollersSpeedOut);
+    spin(EndEffectorConstants.EndEffectorSpeedOut);
   }
 
   public void NoSpin() {

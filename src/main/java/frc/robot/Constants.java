@@ -65,13 +65,24 @@ public final class Constants {
     public static final int kMotorPort = 19; // particularly this value
     public static final double kGearRatio = 3;
 
-    public static final double kRollersSpeedIn = 0.5;
-    public static final double kRollersSpeedOut = -0.5;
-    public static final double kBlueWheelSpeedIn = 0.5;
-    public static final double kBlueWheelSpeedOut = -0.5;
+    public static final double EndEffectorSpeedIn = 0.5;
+    public static final double EndEffectorSpeedOut = -0.5;
+
     // public static final double kMaxSpeedRPM = 20;
 
   }
+
+   public static final class ArmConstants {
+    // check these values
+    public static final int kMotorPort = 19; // particularly this value
+    public static final double kGearRatio = 20;
+
+    public static final double armSpeed = 0.5;
+
+    // public static final double kMaxSpeedRPM = 20;
+
+  }
+
 
   /* Turn position 0 = -0.09177295726990496
   turn Absolute position 0 = 2.784981618673524
