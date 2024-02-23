@@ -24,6 +24,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.util.TunableNumber;
+import lombok.Getter;
 import org.littletonrobotics.junction.Logger;
 
 public class Module {
@@ -42,6 +43,8 @@ public class Module {
 
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("Module");
+
+  @Getter private SwerveModuleState setpointState = new SwerveModuleState();
 
   public TunableNumber m_driveKP = new TunableNumber("Drive P");
   public TunableNumber m_driveKI = new TunableNumber("Drive I");
@@ -95,6 +98,22 @@ public class Module {
     setBrakeMode(true);
   }
 
+  /** Runs to {@link SwerveModuleState} */
+  public void runSetpoint(SwerveModuleState setpoint) {
+    setpointState = setpoint;
+    io.runDriveVelocitySetpoint(
+        setpoint.speedMetersPerSecond / WHEEL_RADIUS,
+        driveFeedforward.calculate(setpoint.speedMetersPerSecond / WHEEL_RADIUS));
+    io.runTurnPositionSetpoint(setpoint.angle.getRadians());
+  }
+
+  /** Runs characterization volts or amps depending on using voltage or current control. */
+  public void runCharacterization(double turnSetpointRads, double input) {
+    io.runTurnPositionSetpoint(turnSetpointRads);
+
+    io.runDriveVolts(input);
+  }
+
   public void periodic() {
     io.updateInputs(inputs);
     Logger.processInputs("Drive/Module" + Integer.toString(index), inputs);
@@ -130,7 +149,7 @@ public class Module {
   }
 
   /** Runs the module with the specified setpoint state. Returns the optimized state. */
-  public SwerveModuleState runSetpoint(SwerveModuleState state) {
+  /*public SwerveModuleState runSetpoint(SwerveModuleState state) {
     // Optimize state based on current angle
     // Controllers run in "periodic" when the setpoint is not null
     var optimizedState = SwerveModuleState.optimize(state, getAngle());
@@ -140,10 +159,10 @@ public class Module {
     speedSetpoint = optimizedState.speedMetersPerSecond;
 
     return optimizedState;
-  }
+  }*/
 
   /** Runs the module with the specified voltage while controlling to zero degrees. */
-  public void runCharacterization(double volts) {
+  /*public void runCharacterization(double volts) {
     // Closed loop turn control
     angleSetpoint = new Rotation2d();
 
@@ -160,7 +179,7 @@ public class Module {
     turnFeedback.setP(SmartDashboard.getNumber("Turn P", 0));
     turnFeedback.setI(SmartDashboard.getNumber("Turn I", 0));
     turnFeedback.setD(SmartDashboard.getNumber("Turn D", 0));
-  }
+  } */
 
   /** Disables all outputs to motors. */
   public void stop() {
