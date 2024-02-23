@@ -13,15 +13,12 @@
 
 package frc.robot.subsystems.drive;
 
-import static edu.wpi.first.units.Units.*;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.pathfinding.Pathfinding;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.util.ReplanningConfig;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -40,14 +37,12 @@ import org.littletonrobotics.junction.AutoLogOutput;
 import org.littletonrobotics.junction.Logger;
 
 public class Drive extends SubsystemBase {
-  private static final double MAX_LINEAR_SPEED = Units.feetToMeters(14.5) / 2; // TODO divided by 5
+  private static final double MAX_LINEAR_SPEED = Units.feetToMeters(14.5);
   private static final double TRACK_WIDTH_X = Units.inchesToMeters(24.0);
   private static final double TRACK_WIDTH_Y = Units.inchesToMeters(24.0);
   private static final double DRIVE_BASE_RADIUS =
       Math.hypot(TRACK_WIDTH_X / 2.0, TRACK_WIDTH_Y / 2.0);
   private static final double MAX_ANGULAR_SPEED = MAX_LINEAR_SPEED / DRIVE_BASE_RADIUS;
-
-  private final SlewRateLimiter speedFilter = new SlewRateLimiter(5);
 
   private final GyroIO gyroIO;
   private final GyroIOInputsAutoLogged gyroInputs = new GyroIOInputsAutoLogged();
