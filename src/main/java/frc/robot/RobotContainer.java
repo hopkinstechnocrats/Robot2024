@@ -23,13 +23,16 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.MechanismCommands;
 import frc.robot.subsystems.drive.Drive;
+import frc.robot.subsystems.drive.EndEffector;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIONavX;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.mechanism.intake;
+import frc.robot.subsystems.drive.TopArm;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -41,9 +44,11 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
-  private double x_distance;
-  private double y_distance;
   // private final DistanceDrive distanceDrive;
+  private final EndEffector endEffector = new EndEffector();
+  private final TopArm arm = new TopArm();
+  private final Intake intake = new Intake();
+
 
   // Controller
   private final CommandXboxController driverController = new CommandXboxController(0);
@@ -129,6 +134,9 @@ public class RobotContainer {
             () -> -driverController.getLeftX(),
             () -> -driverController.getRightX()));
 
+    endEffector.setDefaultCommand(MechanismCommands.moveEndEffector(endEffector));
+
+    
     driverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
     driverController
         .b()
@@ -140,17 +148,13 @@ public class RobotContainer {
                     drive)
                 .ignoringDisable(true));
 
-    DriveCommands.DistanceDrive(drive, x_distance, y_distance);
-    operatorController
-        .a()
-        .onTrue(
-            Commands.runOnce(
-                    () ->
-                        drive.setPose(
-                            new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
-                    drive)
-                .ignoringDisable(false));
     operatorController.x().onTrue(new InstantCommand(() -> intake.intakeSpin()));
+
+    operatorController.a().whileTrue(MechanismCommands.spinPlease2(endEffector));
+    operatorController.b().whileTrue(MechanismCommands.spinPlease(endEffector));
+    // operatorController.x().onTrue(new InstantCommand(() -> arm.setMotorDownPosition(0)));
+    // operatorController.y().onTrue(new InstantCommand(() -> arm.setMotorDownPosition(30)));
+
   }
 
   /**

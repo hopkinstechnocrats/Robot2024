@@ -48,7 +48,7 @@ public class ModuleIOTalonFX implements ModuleIO {
   private final StatusSignal<Double> driveAppliedVolts;
   private final StatusSignal<Double> driveCurrent;
 
-  private final Double turnAbsolutePosition;
+  // private final Double turnAbsolutePosition;
   private final StatusSignal<Double> turnPosition;
   private final StatusSignal<Double> turnVelocity;
   private final StatusSignal<Double> turnAppliedVolts;
@@ -56,7 +56,7 @@ public class ModuleIOTalonFX implements ModuleIO {
 
   // Gear ratios for SDS MK4i L2, adjust as necessary
   private final double DRIVE_GEAR_RATIO = (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0);
-  private final double TURN_GEAR_RATIO = 150.0 / 7.0;
+  private final double TURN_GEAR_RATIO = 12.8 / 1.0; // From mk4 datasheet
 
   private final boolean isTurnMotorInverted = true;
   private final Rotation2d absoluteEncoderOffset;
@@ -65,29 +65,37 @@ public class ModuleIOTalonFX implements ModuleIO {
     switch (index) {
         // FL,FR,BL,BR
       case 0:
-        driveTalon = new TalonFX(Constants.DriveConstants.kFrontLeftDriveMotorPort);
-        turnTalon = new TalonFX(Constants.DriveConstants.kFrontLeftTurningMotorPort);
+        driveTalon =
+            new TalonFX(Constants.DriveConstants.kFrontLeftDriveMotorPort, "GertrudeGreyser");
+        turnTalon =
+            new TalonFX(Constants.DriveConstants.kFrontLeftTurningMotorPort, "GertrudeGreyser");
         encoder = new AnalogEncoder(Constants.DriveConstants.kFrontLeftTurningEncoderPort);
         absoluteEncoderOffset =
             new Rotation2d(Constants.DriveConstants.kFrontLeftOffset); // MUST BE CALIBRATED
         break;
       case 1:
-        driveTalon = new TalonFX(Constants.DriveConstants.kFrontRightDriveMotorPort);
-        turnTalon = new TalonFX(Constants.DriveConstants.kFrontRightTurningMotorPort);
+        driveTalon =
+            new TalonFX(Constants.DriveConstants.kFrontRightDriveMotorPort, "GertrudeGreyser");
+        turnTalon =
+            new TalonFX(Constants.DriveConstants.kFrontRightTurningMotorPort, "GertrudeGreyser");
         encoder = new AnalogEncoder(Constants.DriveConstants.kFrontRightTurningEncoderPort);
         absoluteEncoderOffset =
             new Rotation2d(Constants.DriveConstants.kFrontRightOffset); // MUST BE CALIBRATED
         break;
       case 2:
-        driveTalon = new TalonFX(Constants.DriveConstants.kRearLeftDriveMotorPort);
-        turnTalon = new TalonFX(Constants.DriveConstants.kRearLeftTurningMotorPort);
+        driveTalon =
+            new TalonFX(Constants.DriveConstants.kRearLeftDriveMotorPort, "GertrudeGreyser");
+        turnTalon =
+            new TalonFX(Constants.DriveConstants.kRearLeftTurningMotorPort, "GertrudeGreyser");
         encoder = new AnalogEncoder(Constants.DriveConstants.kRearLeftTurningEncoderPort);
         absoluteEncoderOffset =
             new Rotation2d(Constants.DriveConstants.kRearLeftOffset); // MUST BE CALIBRATED
         break;
       case 3:
-        driveTalon = new TalonFX(Constants.DriveConstants.kRearRightDriveMotorPort);
-        turnTalon = new TalonFX(Constants.DriveConstants.kRearRightTurningMotorPort);
+        driveTalon =
+            new TalonFX(Constants.DriveConstants.kRearRightDriveMotorPort, "GertrudeGreyser");
+        turnTalon =
+            new TalonFX(Constants.DriveConstants.kRearRightTurningMotorPort, "GertrudeGreyser");
         encoder = new AnalogEncoder(Constants.DriveConstants.kRearRightTurningEncoderPort);
         absoluteEncoderOffset =
             new Rotation2d(Constants.DriveConstants.kRearRightOffset); // MUST BE CALIBRATED
@@ -113,7 +121,7 @@ public class ModuleIOTalonFX implements ModuleIO {
     driveAppliedVolts = driveTalon.getMotorVoltage();
     driveCurrent = driveTalon.getStatorCurrent();
 
-    turnAbsolutePosition = encoder.getAbsolutePosition();
+    // turnAbsolutePosition = encoder.getAbsolutePosition();
     turnPosition = turnTalon.getPosition();
     turnVelocity = turnTalon.getVelocity();
     turnAppliedVolts = turnTalon.getMotorVoltage();
@@ -153,7 +161,7 @@ public class ModuleIOTalonFX implements ModuleIO {
     inputs.driveCurrentAmps = new double[] {driveCurrent.getValueAsDouble()};
 
     inputs.turnAbsolutePosition =
-        Rotation2d.fromRotations(turnAbsolutePosition).minus(absoluteEncoderOffset);
+        Rotation2d.fromRotations(encoder.getAbsolutePosition()).minus(absoluteEncoderOffset);
     inputs.turnPosition =
         Rotation2d.fromRotations(turnPosition.getValueAsDouble() / TURN_GEAR_RATIO);
     inputs.turnVelocityRadPerSec =

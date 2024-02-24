@@ -23,6 +23,7 @@ package frc.robot;
  */
 public final class Constants {
   public static final Mode currentMode = Mode.REAL;
+  public static final boolean tuningMode = true;
 
   public static final double kWheelDiameterMeters = 0.1016; // 4 inches in meters
   public static final double kEncoderCPR = 2048;
@@ -35,6 +36,14 @@ public final class Constants {
     public static final int kFrontRightDriveMotorPort = 8;
     public static final int kRearRightDriveMotorPort = 12;
 
+    public static final double kDriveKP = 0.1; // good number
+    public static final double kDriveKI = 0.01;
+    public static final double kDriveKD = 0;
+
+    public static final double kTurnKP = 1;
+    public static final double kTurnKI = 0;
+    public static final double kTurnKD = 0;
+
     public static final int kFrontLeftTurningMotorPort = 7;
     public static final int kRearLeftTurningMotorPort = 11;
     public static final int kFrontRightTurningMotorPort = 9;
@@ -42,18 +51,71 @@ public final class Constants {
 
     public static final int kFrontLeftTurningEncoderPort = 2;
     public static final int kRearLeftTurningEncoderPort = 3;
-    public static final int kFrontRightTurningEncoderPort = 1;
-    public static final int kRearRightTurningEncoderPort = 0;
+    public static final int kFrontRightTurningEncoderPort = 0;
+    public static final int kRearRightTurningEncoderPort = 1;
 
-    public static final double kFrontRightOffset = 0.8512404586715543;
-    public static final double kFrontLeftOffset = 0.6399792730535301;
-    public static final double kRearRightOffset = 0.8732204457641093;
-    public static final double kRearLeftOffset = 0.7323471197644466;
+    // rotations
+    public static final double kFrontRightOffset =
+        2.1992729427258633; // 0.00024970629629424693, .8477700479390661
+    public static final double kFrontLeftOffset =
+        0.8831237151806749; // -2.644633793774256, 0.1435600110325262
+    public static final double kRearRightOffset =
+        0.7950913583590834; // -0.5059047939851695, .8759384494153275
+    public static final double kRearLeftOffset =
+        1.4449704373167107; // -2.641448463258407. .2315244928355887
   }
 
+  public static final class EndEffectorConstants {
+    // check these values
+    public static final int kBlueMotorPort = 28; // particularly this value
+    public static final int kRollerMotorPort = 27;
+    public static final double kGearRatio = 3;
+
+    public static final double EndEffectorSpeedIn = 0.3;
+    public static final double EndEffectorSpeedOut = -0.3;
+
+    // public static final double kMaxSpeedRPM = 20;
+    
   public static final class IntakeConstants {
     public static final double intakeSpeed = 0.55;
   }
+  
+  public static final class TopArmConstants {
+    public static final int kTopArmMotorPort = 25; // not true
+    public static final double kP = .03;
+    public static final double kI = .00005;
+    public static final double kD = 0.5;
+    public static final double kIntegralZone = 1.5;
+    public static final double kFeedForward = 0;
+    public static final double kMinOutput = -.7;
+    public static final double kMaxOutput = 1;
+
+    public static final double kPDown = .02;
+    public static final double kGearRatio = 20; // why was it 150?
+
+    public static final double kAbsEncoderOffset = -39;
+    public static final boolean kAbsEncoderReversed = false;
+    public static final double kClosedLoopRampRate = 0.5;
+
+    public static final double kMidNodeScorePosCone = 7;
+    public static final double kMidNodeScorePosCube = 5;
+
+    public static final double kHighNodeScorePosCube = -10;
+    public static final double kHighNodeScorePosCone = -33;
+    public static final int kTopArmEncoderPort = 0; // for if we add an analog encoder
+    public static final int kSecondArmMotorPort = 26; // not true
+  }
+
+  /* Turn position 0 = -0.09177295726990496
+  turn Absolute position 0 = 2.784981618673524
+  Turn position 1 = 2.9708094592051917
+  turn Absolute position 1 = 0.35012567346983686
+  Turn position 2 = 3.0972299292041408
+  turn Absolute position 2 = 2.8707491349248175
+  Turn position 3 = -1.0753614384621781
+  turn Absolute position 3 = 0.8750591080688083
+  */
+
   // dont worry about that
   public static enum Mode {
     /** Running on a real robot. */
