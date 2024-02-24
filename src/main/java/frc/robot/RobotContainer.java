@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.MechanismCommands;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.EndEffector;
 import frc.robot.subsystems.drive.GyroIO;
@@ -30,6 +30,7 @@ import frc.robot.subsystems.drive.GyroIONavX;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
+import frc.robot.subsystems.drive.TopArm;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -42,6 +43,7 @@ public class RobotContainer {
   // Subsystems
   private final Drive drive;
   private final EndEffector endEffector = new EndEffector();
+  private final TopArm arm = new TopArm();
 
   // Controller
   private final CommandXboxController driverController = new CommandXboxController(0);
@@ -125,6 +127,8 @@ public class RobotContainer {
             () -> -driverController.getLeftY(),
             () -> -driverController.getLeftX(),
             () -> -driverController.getRightX()));
+
+    endEffector.setDefaultCommand(MechanismCommands.moveEndEffector(endEffector));
     driverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
     driverController
         .b()
@@ -136,8 +140,11 @@ public class RobotContainer {
                     drive)
                 .ignoringDisable(true));
 
-    operatorController.a().onTrue(new InstantCommand(() -> endEffector.spinEndEffectorOut()));
-    operatorController.b().onTrue(new InstantCommand(() -> endEffector.spinEndEffectorIn()));
+    operatorController.a().whileTrue(MechanismCommands.spinPlease2(endEffector));
+    operatorController.b().whileTrue(MechanismCommands.spinPlease(endEffector));
+    // operatorController.x().onTrue(new InstantCommand(() -> arm.setMotorDownPosition(0)));
+    // operatorController.y().onTrue(new InstantCommand(() -> arm.setMotorDownPosition(30)));
+
   }
 
   /**

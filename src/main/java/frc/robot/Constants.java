@@ -62,27 +62,42 @@ public final class Constants {
 
   public static final class EndEffectorConstants {
     // check these values
-    public static final int kMotorPort = 19; // particularly this value
+    public static final int kBlueMotorPort = 28; // particularly this value
+    public static final int kRollerMotorPort = 27;
     public static final double kGearRatio = 3;
 
-    public static final double EndEffectorSpeedIn = 0.5;
-    public static final double EndEffectorSpeedOut = -0.5;
+    public static final double EndEffectorSpeedIn = 0.3;
+    public static final double EndEffectorSpeedOut = -0.3;
 
     // public static final double kMaxSpeedRPM = 20;
 
   }
 
-   public static final class ArmConstants {
-    // check these values
-    public static final int kMotorPort = 19; // particularly this value
-    public static final double kGearRatio = 20;
+  public static final class TopArmConstants {
+    public static final int kTopArmMotorPort = 25; // not true
+    public static final double kP = .03;
+    public static final double kI = .00005;
+    public static final double kD = 0.5;
+    public static final double kIntegralZone = 1.5;
+    public static final double kFeedForward = 0;
+    public static final double kMinOutput = -.7;
+    public static final double kMaxOutput = 1;
 
-    public static final double armSpeed = 0.5;
+    public static final double kPDown = .02;
+    public static final double kGearRatio = 20; // why was it 150?
 
-    // public static final double kMaxSpeedRPM = 20;
+    public static final double kAbsEncoderOffset = -39;
+    public static final boolean kAbsEncoderReversed = false;
+    public static final double kClosedLoopRampRate = 0.5;
 
+    public static final double kMidNodeScorePosCone = 7;
+    public static final double kMidNodeScorePosCube = 5;
+
+    public static final double kHighNodeScorePosCube = -10;
+    public static final double kHighNodeScorePosCone = -33;
+    public static final int kTopArmEncoderPort = 0; // for if we add an analog encoder
+    public static final int kSecondArmMotorPort = 26; // not true
   }
-
 
   /* Turn position 0 = -0.09177295726990496
   turn Absolute position 0 = 2.784981618673524

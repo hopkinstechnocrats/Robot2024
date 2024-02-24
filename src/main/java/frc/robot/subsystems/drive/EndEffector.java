@@ -6,9 +6,10 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.EndEffectorConstants;
 
-public class EndEffector {
+public class EndEffector extends SubsystemBase {
 
   CANSparkMax blueWheelMotor;
   RelativeEncoder blueWheelEncoder;
@@ -28,13 +29,13 @@ public class EndEffector {
     setpointLog = table.getEntry("Setpoint (RPM)");
     currentVelLog = table.getEntry("Current Velocity (RPM)");
 
-    rollersMotor = new CANSparkMax(EndEffectorConstants.kMotorPort, MotorType.kBrushless);
+    rollersMotor = new CANSparkMax(EndEffectorConstants.kRollerMotorPort, MotorType.kBrushless);
     rollersEncoder = rollersMotor.getEncoder();
     rollersEncoder.setVelocityConversionFactor(EndEffectorConstants.kGearRatio);
     rollersMotor.setSmartCurrentLimit(15, 30);
     rollersMotor.burnFlash(); // Save settings even after brownout
 
-    blueWheelMotor = new CANSparkMax(EndEffectorConstants.kMotorPort, MotorType.kBrushless);
+    blueWheelMotor = new CANSparkMax(EndEffectorConstants.kBlueMotorPort, MotorType.kBrushless);
     blueWheelEncoder = blueWheelMotor.getEncoder();
     blueWheelEncoder.setVelocityConversionFactor(EndEffectorConstants.kGearRatio);
     blueWheelMotor.setSmartCurrentLimit(15, 30);
@@ -60,5 +61,13 @@ public class EndEffector {
     // currentVelLog.setDouble(manipulatorEncoder.getVelocity());
     blueWheelMotor.set(setpoint);
     rollersMotor.set(setpoint);
+  }
+
+  public void move(boolean button) {
+    if (button) {
+      spin(0.5);
+    } else {
+      NoSpin();
+    }
   }
 }
