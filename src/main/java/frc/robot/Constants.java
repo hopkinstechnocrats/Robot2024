@@ -50,14 +50,10 @@ public final class Constants {
     public static final int kRearRightTurningEncoderPort = 1;
 
     // rotations
-    public static final double kFrontRightOffset =
-        2.1992729427258633; // 0.00024970629629424693, .8477700479390661
-    public static final double kFrontLeftOffset =
-        0.8831237151806749; // -2.644633793774256, 0.1435600110325262
-    public static final double kRearRightOffset =
-        0.7950913583590834; // -0.5059047939851695, .8759384494153275
-    public static final double kRearLeftOffset =
-        1.4449704373167107; // -2.641448463258407. .2315244928355887
+    public static final double kFrontRightOffset = (2.321516939263821 + Math.PI);
+    public static final double kFrontLeftOffset = 0.34651825800256497;
+    public static final double kRearRightOffset = 0.3403026838679898;
+    public static final double kRearLeftOffset = (-1.725615573002353 + Math.PI);
   }
 
   /* Turn position 0 = -0.09177295726990496
