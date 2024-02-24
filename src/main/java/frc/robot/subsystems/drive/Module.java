@@ -13,7 +13,6 @@
 
 package frc.robot.subsystems.drive;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -35,8 +34,8 @@ public class Module {
   private final int index;
 
   private final SimpleMotorFeedforward driveFeedforward;
-  private final PIDController driveFeedback;
-  private final PIDController turnFeedback;
+  // private final PIDController driveFeedback;
+  // private final PIDController turnFeedback;
   private Rotation2d angleSetpoint = null; // Setpoint for closed loop control, null for open loop
   private Double speedSetpoint = null; // Setpoint for closed loop control, null for open loop
   private Rotation2d turnRelativeOffset = null; // Relative + Offset = Absolute
@@ -77,24 +76,23 @@ public class Module {
       case REAL:
       case REPLAY:
         driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
-        driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
-        turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
+        // driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
+        // turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
         break;
       case SIM:
         driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
-        driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
-        turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
+        // driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
+        // turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
         break;
       default:
         io.setTurnPID(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
         io.setDrivePID(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
         driveFeedforward = new SimpleMotorFeedforward(m_driveFFKS, m_driveFFKv);
-        driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
-        turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
+        // driveFeedback = new PIDController(m_driveKP.get(), m_driveKI.get(), m_driveKD.get());
+        // turnFeedback = new PIDController(m_turnKP.get(), m_turnKI.get(), m_turnKD.get());
         break;
     }
 
-    turnFeedback.enableContinuousInput(-Math.PI, Math.PI);
     setBrakeMode(true);
   }
 
@@ -125,7 +123,7 @@ public class Module {
     }
 
     // Run closed loop turn control
-    if (angleSetpoint != null) {
+    /*if (angleSetpoint != null) {
       io.setTurnVoltage(
           turnFeedback.calculate(getAngle().getRadians(), angleSetpoint.getRadians()));
 
@@ -145,7 +143,7 @@ public class Module {
             driveFeedforward.calculate(velocityRadPerSec)
                 + driveFeedback.calculate(inputs.driveVelocityRadPerSec, velocityRadPerSec));
       }
-    }
+    }*/
   }
 
   /** Runs the module with the specified setpoint state. Returns the optimized state. */
