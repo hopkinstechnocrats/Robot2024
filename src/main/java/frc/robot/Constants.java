@@ -46,10 +46,10 @@ public final class Constants {
 
     public static final int kFrontLeftTurningEncoderPort = 2;
     public static final int kRearLeftTurningEncoderPort = 3;
-    public static final int kFrontRightTurningEncoderPort = 0;
-    public static final int kRearRightTurningEncoderPort = 1;
+    public static final int kFrontRightTurningEncoderPort = 1;
+    public static final int kRearRightTurningEncoderPort = 0;
 
-    // rotations
+    // VALUE IS RADIANS
     public static final double kFrontRightOffset =
         2.1992729427258633; // 0.00024970629629424693, .8477700479390661
     public static final double kFrontLeftOffset =
