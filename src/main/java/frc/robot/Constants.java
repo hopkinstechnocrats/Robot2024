@@ -50,8 +50,8 @@ public final class Constants {
     public static final int kRearRightTurningEncoderPort = 0;
 
     // VALUE IS RADIANS
-    public static final double kFrontRightOffset =
-        2.1992729427258633; // 0.00024970629629424693, .8477700479390661
+    public static final double kFrontRightOffset = 2.1992729427258633; // 0.000
+    //  24970629629424693, .8477700479390661
     public static final double kFrontLeftOffset =
         0.8831237151806749; // -2.644633793774256, 0.1435600110325262
     public static final double kRearRightOffset =
