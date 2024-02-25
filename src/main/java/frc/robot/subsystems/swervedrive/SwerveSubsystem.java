@@ -30,12 +30,14 @@ import org.photonvision.targeting.PhotonPipelineResult;
 import swervelib.SwerveController;
 import swervelib.SwerveDrive;
 import swervelib.SwerveDriveTest;
+import swervelib.encoders.SwerveAbsoluteEncoder;
 import swervelib.math.SwerveMath;
 import swervelib.parser.SwerveControllerConfiguration;
 import swervelib.parser.SwerveDriveConfiguration;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
+import swervelib.SwerveModule;
 
 public class SwerveSubsystem extends SubsystemBase
 {
@@ -71,7 +73,7 @@ public class SwerveSubsystem extends SubsystemBase
     System.out.println("}");
 
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
-    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
+    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.NONE;
     try
     {
       swerveDrive = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
@@ -84,6 +86,7 @@ public class SwerveSubsystem extends SubsystemBase
     swerveDrive.setHeadingCorrection(false); // Heading correction should only be used while controlling the robot via angle.
     swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for simulations since it causes discrepancies not seen in real life.
     setupPathPlanner();
+    swerveDrive.setOdometryPeriod(0.100);
   }
 
   /**
@@ -388,6 +391,24 @@ public class SwerveSubsystem extends SubsystemBase
   public void zeroGyro()
   {
     swerveDrive.zeroGyro();
+  }
+
+  public void printAnalogs()
+  {
+    for (SwerveModule module : swerveDrive.getModules())
+    {
+      if (module.getAbsoluteEncoder() == null)
+      {
+        throw new RuntimeException("Absolute encoders are required to find the coupling ratio.");
+      }
+      SwerveAbsoluteEncoder absoluteEncoder = module.getAbsoluteEncoder();
+      if (absoluteEncoder.readingError)
+      {
+        throw new RuntimeException("Absolute encoder encountered a reading error please debug.");
+      }
+      System.out.println("Fetching the current absolute encoder position.");
+      System.out.println(absoluteEncoder.getAbsolutePosition());
+    }
   }
 
   /**
