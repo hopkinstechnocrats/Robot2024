@@ -18,8 +18,6 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.TimedRobot;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -128,10 +126,4 @@ public class RobotContainer
     drivebase.setMotorBrake(brake);
   }
 
-  public class Robot extends TimedRobot {
-    @Override
-    public void robotInit() {
-      CameraServer.startAutomaticCapture();
-    }
-  }
 }
