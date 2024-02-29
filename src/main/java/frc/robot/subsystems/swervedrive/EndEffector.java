@@ -42,12 +42,12 @@ public class EndEffector extends SubsystemBase {
     blueWheelMotor.burnFlash(); // Save settings even after brownout
   }
 
-  public void spinEndEffectorIn() {
-    spin(EndEffectorConstants.EndEffectorSpeedIn);
+  public void spinRollers() {
+    rollersMotor.set(EndEffectorConstants.rollerSpeed);
   }
 
-  public void spinEndEffectorOut() {
-    spin(EndEffectorConstants.EndEffectorSpeedOut);
+  public void spinBlueWheel() {
+    blueWheelMotor.set(EndEffectorConstants.blueWheelSpeed);  //TODO made a change here.  maybe wont work
   }
 
   public void NoSpin() {
@@ -55,19 +55,4 @@ public class EndEffector extends SubsystemBase {
     rollersMotor.set(0);
   }
 
-  public void spin(double setpoint) {
-    // manipulatorPID.setReference(setpoint, ControlType.kVelocity); PID
-    // setpointLog.setDouble(setpoint);
-    // currentVelLog.setDouble(manipulatorEncoder.getVelocity());
-    blueWheelMotor.set(setpoint);
-    rollersMotor.set(setpoint);
-  }
-
-  public void move(boolean button) {
-    if (button) {
-      spin(0.5);
-    } else {
-      NoSpin();
-    }
-  }
 }

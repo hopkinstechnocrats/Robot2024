@@ -21,18 +21,18 @@ public class MechanismCommands {
         endEffector);
   }
 
-  public static Command spinOut(EndEffector endEffector) {
+  public static Command spinBlueWheel(EndEffector endEffector) {
     return Commands.run(
         () -> {
-          endEffector.spinEndEffectorOut();
+          endEffector.spinBlueWheel();
         },
         endEffector);
   }
 
-  public static Command spinIn(EndEffector endEffector) {
+  public static Command spinRollers(EndEffector endEffector) {
     return Commands.run(
         () -> {
-          endEffector.spinEndEffectorIn();
+          endEffector.spinRollers();
         },
         endEffector);
   }

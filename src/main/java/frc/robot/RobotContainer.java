@@ -115,8 +115,8 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
 
-    operatorController.a().whileTrue(MechanismCommands.spinIn(endEffector));
-        operatorController.b().whileTrue(MechanismCommands.spinOut(endEffector));
+    operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
+        operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));
         operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
         operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
         operatorController.y().onTrue(MechanismCommands.moveArm(arm));

@@ -55,8 +55,10 @@ public final class Constants
     public static final int kRollerMotorPort = 27;
     public static final double kGearRatio = 3;
 
-    public static final double EndEffectorSpeedIn = 0.3;
-    public static final double EndEffectorSpeedOut = -0.3;
+    //public static final double EndEffectorSpeedIn = 0.3;
+    //public static final double EndEffectorSpeedOut = -0.3;
+    public static final double rollerSpeed = -1;
+    public static final double blueWheelSpeed = -1;
   }
 
   public static final class IntakeConstants {
