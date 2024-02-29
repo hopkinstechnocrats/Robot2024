@@ -93,20 +93,13 @@ public class RobotContainer
         () -> -driverXbox.getRawAxis(2));
 
     drivebase.setDefaultCommand(
-        !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
+        !RobotBase.isSimulation() ? driveFieldOrientedAngularVelocity : driveFieldOrientedDirectAngleSim);
 
         endEffector.setDefaultCommand(MechanismCommands.moveEndEffector(endEffector));
         intake.setDefaultCommand(MechanismCommands.moveNoIntake(intake));
         climb.setDefaultCommand(MechanismCommands.noClimb(climb));
     
-        operatorController.a().whileTrue(MechanismCommands.spinIn(endEffector));
-        operatorController.b().whileTrue(MechanismCommands.spinOut(endEffector));
-        operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
-        operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
-        operatorController.y().onTrue(MechanismCommands.moveArm(arm));
-    
-        operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
-        operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
+        
   }
 
   /**
@@ -121,12 +114,15 @@ public class RobotContainer
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-    driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
-    driverXbox.b().whileTrue(
-        Commands.deferredProxy(() -> drivebase.driveToPose(
-                                   new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
-                              ));
-    driverXbox.y().onTrue(Commands.runOnce(drivebase::printAnalogs));
+
+    operatorController.a().whileTrue(MechanismCommands.spinIn(endEffector));
+        operatorController.b().whileTrue(MechanismCommands.spinOut(endEffector));
+        operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
+        operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
+        operatorController.y().onTrue(MechanismCommands.moveArm(arm));
+    
+        operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
+        operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
     // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
   }
 

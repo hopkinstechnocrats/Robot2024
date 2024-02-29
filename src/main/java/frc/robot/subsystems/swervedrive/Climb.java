@@ -11,6 +11,7 @@ public class Climb extends SubsystemBase {
   public Climb() {
     climbMotor = new TalonFX(20, "GertrudeGreyser");
     climbMotor.setVoltage(2);
+    
   }
 
   public void climbUp() {
