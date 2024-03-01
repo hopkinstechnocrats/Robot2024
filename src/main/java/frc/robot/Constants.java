@@ -57,7 +57,7 @@ public final class Constants
 
     //public static final double EndEffectorSpeedIn = 0.3;
     //public static final double EndEffectorSpeedOut = -0.3;
-    public static final double rollerSpeed = -1;
+    public static final double rollerSpeed = 1;
     public static final double blueWheelSpeed = -1;
   }
 
@@ -76,7 +76,7 @@ public final class Constants
     public static final double kMinOutput = -.7;
     public static final double kMaxOutput = 1;
 
-    public static final double kPDown = .02;
+    public static final double kPDown = .002;
     public static final double kGearRatio = 20; // why was it 150?
 
     public static final double kAbsEncoderOffset = 0;
