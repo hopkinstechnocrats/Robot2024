@@ -64,7 +64,15 @@ public class MechanismCommands {
   public static Command moveArmFurther(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorDownPosition(100);
+          arm.setMotorDownPosition(500);
+        },
+        arm);
+  }
+
+  public static Command armStraightUp(TopArm arm) {
+    return Commands.run(
+        () -> {
+          arm.setMotorDownPosition(380);
         },
         arm);
   }

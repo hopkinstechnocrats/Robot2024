@@ -30,7 +30,7 @@ public class TopArm extends SubsystemBase {
     //secondArmMotor = new CANSparkMax(TopArmConstants.kSecondArmMotorPort, MotorType.kBrushless);
     //secondArmMotor.setSmartCurrentLimit(40);
     //secondArmMotor.follow(topArmMotor);
-    //secondArmMotor.setInverted(true);
+    //topArmMotor.setInverted(true);
 //TODO commented out second motor
     topArmMotor.restoreFactoryDefaults();
     // topArmMotor.enableSoftLimit(SoftLimitDirection.kForward, true);

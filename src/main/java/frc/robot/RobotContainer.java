@@ -120,9 +120,12 @@ public class RobotContainer
         operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
         operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
         operatorController.y().onTrue(MechanismCommands.moveArm(arm));
+        operatorController.rightTrigger().whileTrue(MechanismCommands.armStraightUp(arm));
     
         operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
         operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
+       
+
     // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
   }
 
