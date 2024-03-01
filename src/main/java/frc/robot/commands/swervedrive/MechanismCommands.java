@@ -77,6 +77,14 @@ public class MechanismCommands {
         arm);
   }
 
+  public static Command armScoringPosition(TopArm arm) {
+    return Commands.run(
+        () -> {
+          arm.setMotorPosition(115); //TO DO: test
+        },
+        arm);
+  }
+
   public static Command climbUp(Climb climb) {
     return Commands.run(
         () -> {
