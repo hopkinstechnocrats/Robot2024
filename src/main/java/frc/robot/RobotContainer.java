@@ -10,6 +10,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -24,6 +26,8 @@ import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import frc.robot.subsystems.swervedrive.TopArm;
 
 import java.io.File;
+
+import com.pathplanner.lib.auto.AutoBuilder;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -41,6 +45,8 @@ public class RobotContainer
   private final Intake intake = new Intake();
   private final TopArm arm = new TopArm();
 
+  private final SendableChooser<Command> autoChooser;
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final CommandXboxController driverXbox = new CommandXboxController(0);
   final CommandXboxController operatorController = new CommandXboxController(1);
@@ -51,6 +57,8 @@ public class RobotContainer
    */
   public RobotContainer()
   {
+     autoChooser = AutoBuilder.buildAutoChooser();
+     SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
     configureBindings();
 
@@ -115,7 +123,7 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
 
-    operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
+    operatorController.povDown().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
         operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));
         operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
         operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
@@ -134,10 +142,15 @@ public class RobotContainer
    *
    * @return the command to run in autonomous
    */
+
+  
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
     return drivebase.getAutonomousCommand("New Auto");
+    //return autoChooser.getSelected(); //TODO uncomment and comment aline above
+  
+
   }
 
   public void setDriveMode()

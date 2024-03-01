@@ -16,6 +16,8 @@ public class TopArm extends SubsystemBase {
   CANSparkMax secondArmMotor;
   SparkMaxPIDController armPIDController;
   SparkMaxPIDController armDownPIDController;
+  SparkMaxPIDController armDownPIDController2;
+
   DutyCycleEncoder absDutyCycleEncoder;
   RelativeEncoder relativeEncoder;
   double armGoalPos;
@@ -26,13 +28,18 @@ public class TopArm extends SubsystemBase {
   /** */
   public TopArm() {
     topArmMotor = new CANSparkMax(TopArmConstants.kTopArmMotorPort, MotorType.kBrushless);
-    //topArmMotor.setSmartCurrentLimit(40);
-    //secondArmMotor = new CANSparkMax(TopArmConstants.kSecondArmMotorPort, MotorType.kBrushless);
-    //secondArmMotor.setSmartCurrentLimit(40);
-    //secondArmMotor.follow(topArmMotor);
-    //topArmMotor.setInverted(true);
-//TODO commented out second motor
+    secondArmMotor = new CANSparkMax(TopArmConstants.kSecondArmMotorPort, MotorType.kBrushless);
+    
     topArmMotor.restoreFactoryDefaults();
+    secondArmMotor.restoreFactoryDefaults();
+
+    secondArmMotor.setSmartCurrentLimit(40);
+    topArmMotor.setSmartCurrentLimit(40);
+
+    topArmMotor.setInverted(false);  //TODO invert this
+    secondArmMotor.follow(topArmMotor,true);
+//TODO commented out second motor
+
     // topArmMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     // topArmMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
     // topArmMotor.setSoftLimit(SoftLimitDirection.kReverse, -45); // -35
@@ -118,6 +125,8 @@ public class TopArm extends SubsystemBase {
 
   public void setMotorDownPosition(double angle) {
     armDownPIDController = topArmMotor.getPIDController();
+
+    armDownPIDController.setReference(angle, CANSparkMax.ControlType.kPosition);
     armDownPIDController.setP(TopArmConstants.kPDown);
     armDownPIDController.setI(TopArmConstants.kI);
     armDownPIDController.setD(TopArmConstants.kD);

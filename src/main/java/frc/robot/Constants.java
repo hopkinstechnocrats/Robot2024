@@ -57,7 +57,7 @@ public final class Constants
 
     //public static final double EndEffectorSpeedIn = 0.3;
     //public static final double EndEffectorSpeedOut = -0.3;
-    public static final double rollerSpeed = 1;
+    public static final double rollerSpeed = 0.8;
     public static final double blueWheelSpeed = -1;
   }
 
@@ -77,7 +77,7 @@ public final class Constants
     public static final double kMaxOutput = 1;
 
     public static final double kPDown = .002;
-    public static final double kGearRatio = 20; // why was it 150?
+    public static final double kGearRatio = 80; // changed it because the angle was off cuz gear ratio was off
 
     public static final double kAbsEncoderOffset = 0;
     public static final boolean kAbsEncoderReversed = false;
@@ -89,12 +89,12 @@ public final class Constants
     public static final double kHighNodeScorePosCube = -10;
     public static final double kHighNodeScorePosCone = -33;
     public static final int kTopArmEncoderPort = 0; // for if we add an analog encoder
-    public static final int kSecondArmMotorPort = 17; // not true
+    public static final int kSecondArmMotorPort = 17;
   }
 
   public static final class ClimbConstants {
     public static final double climbSpeedUp = -0.2;
-    public static final double climbSpeedDown = 0.7;
+    public static final double climbSpeedDown = 1;
   }
 
 }
