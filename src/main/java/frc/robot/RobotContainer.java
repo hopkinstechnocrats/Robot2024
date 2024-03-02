@@ -28,6 +28,7 @@ import frc.robot.subsystems.swervedrive.TopArm;
 import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -47,6 +48,8 @@ public class RobotContainer
 
   private final SendableChooser<Command> autoChooser;
 
+  
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final CommandXboxController driverXbox = new CommandXboxController(0);
   final CommandXboxController operatorController = new CommandXboxController(1);
@@ -59,6 +62,14 @@ public class RobotContainer
   {
      autoChooser = AutoBuilder.buildAutoChooser();
      SmartDashboard.putData("Auto Chooser", autoChooser);
+
+    NamedCommands.registerCommand("moveArmStraightUp", MechanismCommands.armStraightUp(arm));
+    NamedCommands.registerCommand("armToZero", MechanismCommands.moveArm(arm));
+    NamedCommands.registerCommand("spinBlueWheels", MechanismCommands.spinBlueWheel(endEffector));
+    NamedCommands.registerCommand("spinRollers", MechanismCommands.spinRollers(endEffector));
+    NamedCommands.registerCommand("spinIntake", MechanismCommands.moveInIntake(intake));
+
+
     // Configure the trigger bindings
     configureBindings();
 

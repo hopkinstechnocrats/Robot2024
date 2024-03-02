@@ -68,7 +68,7 @@ public final class Constants
 
   public static final class TopArmConstants {
     public static final int kTopArmMotorPort = 18; // not true
-    public static final double kP = 0045;
+    public static final double kP = .0045;
     public static final double kI = 0;
     public static final double kD = 0;
     public static final double kIntegralZone = 15;
