@@ -1,0 +1,50 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.4585613729632017,
+      "y": 7.449176379834242
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Straight to Amp (FNA)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "moveArmScoring"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "spinRollers"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "spinBlueWheels"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

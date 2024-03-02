@@ -10,6 +10,7 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorPort, MotorType.kBrushless);
+    intakeMotor.setSmartCurrentLimit(40);
   }
 
   public void spinIntake() {
