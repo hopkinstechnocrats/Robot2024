@@ -60,14 +60,16 @@ public class RobotContainer
    */
   public RobotContainer()
   {
-     autoChooser = AutoBuilder.buildAutoChooser();
-     SmartDashboard.putData("Auto Chooser", autoChooser);
+    drivebase.setupPathPlanner();
 
     NamedCommands.registerCommand("moveArmStraightUp", MechanismCommands.armStraightUp(arm));
     NamedCommands.registerCommand("armToZero", MechanismCommands.moveArm(arm));
     NamedCommands.registerCommand("spinBlueWheels", MechanismCommands.spinBlueWheel(endEffector));
     NamedCommands.registerCommand("spinRollers", MechanismCommands.spinRollers(endEffector));
     NamedCommands.registerCommand("spinIntake", MechanismCommands.moveInIntake(intake));
+
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("Auto Chooser", autoChooser);
 
 
     // Configure the trigger bindings
