@@ -61,6 +61,14 @@ public class MechanismCommands {
         arm);
   }
 
+  public static Command moveArmScoring(TopArm arm) {
+    return Commands.run(
+        () -> {
+          arm.setMotorDownPosition(115);
+        }
+        arm);
+  }
+
   public static Command moveArmFurther(TopArm arm) {
     return Commands.run(
         () -> {
