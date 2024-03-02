@@ -65,7 +65,7 @@ public class MechanismCommands {
     return Commands.run(
         () -> {
           arm.setMotorDownPosition(115);
-        }
+        },
         arm);
   }
 
