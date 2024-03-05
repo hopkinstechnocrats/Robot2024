@@ -8,7 +8,7 @@ import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.TopArmConstants;
+import frc.robot.Constants.ArmConstants;
 
 public class Arm extends SubsystemBase {
   // private static final String TopArmConstants = null;
@@ -27,8 +27,8 @@ public class Arm extends SubsystemBase {
 
   /** */
   public Arm() {
-    firstArmMotor = new CANSparkMax(TopArmConstants.kTopArmMotorPort, MotorType.kBrushless);
-    secondArmMotor = new CANSparkMax(TopArmConstants.kSecondArmMotorPort, MotorType.kBrushless);
+    firstArmMotor = new CANSparkMax(ArmConstants.kFirstArmMotorPort, MotorType.kBrushless);
+    secondArmMotor = new CANSparkMax(ArmConstants.kSecondArmMotorPort, MotorType.kBrushless);
     
     firstArmMotor.restoreFactoryDefaults();
     secondArmMotor.restoreFactoryDefaults();
@@ -52,15 +52,15 @@ public class Arm extends SubsystemBase {
     // absDutyCycleEncoder.setDistancePerRotation(360);
 
     relativeEncoder = firstArmMotor.getEncoder();
-    relativeEncoder.setPositionConversionFactor(360 / TopArmConstants.kGearRatio);
+    relativeEncoder.setPositionConversionFactor(360 / ArmConstants.kGearRatio);
 
     armPIDController = firstArmMotor.getPIDController();
-    armPIDController.setP(TopArmConstants.kP);
-    armPIDController.setI(TopArmConstants.kI);
-    armPIDController.setD(TopArmConstants.kD);
-    armPIDController.setIZone(TopArmConstants.kIntegralZone);
-    armPIDController.setFF(TopArmConstants.kFeedForward);
-    armPIDController.setOutputRange(TopArmConstants.kMinOutput, TopArmConstants.kMaxOutput);
+    armPIDController.setP(ArmConstants.kP);
+    armPIDController.setI(ArmConstants.kI);
+    armPIDController.setD(ArmConstants.kD);
+    armPIDController.setIZone(ArmConstants.kIntegralZone);
+    armPIDController.setFF(ArmConstants.kFeedForward);
+    armPIDController.setOutputRange(ArmConstants.kMinOutput, ArmConstants.kMaxOutput);
 
     setTrueStowPosition();
 
@@ -107,10 +107,10 @@ public class Arm extends SubsystemBase {
   }
 
   public Double encoderPositionAngle() {
-    double angle = relativeEncoder.getPosition(); // need to divide by encoder resolution??
-    angle -= TopArmConstants.kAbsEncoderOffset; // ?
+    double angle = relativeEncoder.getPosition();
+    angle -= ArmConstants.kAbsEncoderOffset; 
 
-    return angle * (TopArmConstants.kAbsEncoderReversed ? -1 : 1);
+    return angle * (ArmConstants.kAbsEncoderReversed ? -1 : 1);
   }
 
   public void resetEncoderPosition() {
@@ -127,12 +127,12 @@ public class Arm extends SubsystemBase {
     armDownPIDController = firstArmMotor.getPIDController();
 
     armDownPIDController.setReference(angle, CANSparkMax.ControlType.kPosition);
-    armDownPIDController.setP(TopArmConstants.kPDown);
-    armDownPIDController.setI(TopArmConstants.kI);
-    armDownPIDController.setD(TopArmConstants.kD);
-    armDownPIDController.setIZone(TopArmConstants.kIntegralZone);
-    armDownPIDController.setFF(TopArmConstants.kFeedForward);
-    armDownPIDController.setOutputRange(TopArmConstants.kMinOutput, TopArmConstants.kMaxOutput);
+    armDownPIDController.setP(ArmConstants.kPDown);
+    armDownPIDController.setI(ArmConstants.kI);
+    armDownPIDController.setD(ArmConstants.kD);
+    armDownPIDController.setIZone(ArmConstants.kIntegralZone);
+    armDownPIDController.setFF(ArmConstants.kFeedForward);
+    armDownPIDController.setOutputRange(ArmConstants.kMinOutput, ArmConstants.kMaxOutput);
 
     armDownPIDController.setReference(angle, CANSparkMax.ControlType.kPosition);
   }

@@ -6,7 +6,9 @@ package frc.robot;
 
 import com.pathplanner.lib.util.PIDConstants;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 import swervelib.math.Matter;
 
@@ -66,8 +68,8 @@ public final class Constants
     public static final double intakeSpeed = 1;
   }
 
-  public static final class TopArmConstants {
-    public static final int kTopArmMotorPort = 18; // not true
+  public static final class ArmConstants {
+    public static final int kFirstArmMotorPort = 18; // not true
     public static final double kP = .0001;
     public static final double kI = 0.000005;
     public static final double kD = 0;
@@ -96,5 +98,6 @@ public final class Constants
     public static final double climbSpeedUp = -0.2;
     public static final double climbSpeedDown = 1;
   }
+
 
 }
