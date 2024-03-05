@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.swervedrive.Climb;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
-import frc.robot.subsystems.swervedrive.TopArm;
+import frc.robot.subsystems.swervedrive.Arm;
 
 
 public class MechanismCommands {
@@ -53,7 +53,7 @@ public class MechanismCommands {
         intake);
   }
 
-  public static Command moveArm(TopArm arm) {
+  public static Command armZero(Arm arm) {
     return Commands.run(
         () -> {
           arm.setMotorDownPosition(0);
@@ -61,26 +61,26 @@ public class MechanismCommands {
         arm);
   }
 
-  public static Command moveArmScoring(TopArm arm) {
+  public static Command armScoring(Arm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorDownPosition(115);
+          arm.setMotorPosition(115);
         },
         arm);
   }
 
-  public static Command moveArmFurther(TopArm arm) {
+  public static Command armFar(Arm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorDownPosition(130); //TO DO: test
+          arm.setMotorPosition(130); //TO DO: test
         },
         arm);
   }
 
-  public static Command armStraightUp(TopArm arm) {
+  public static Command armStraight(Arm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorDownPosition(100); //TO DO: test
+          arm.setMotorPosition(100); //TO DO: test
         },
         arm);
   }

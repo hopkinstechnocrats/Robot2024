@@ -23,7 +23,7 @@ import frc.robot.subsystems.swervedrive.Climb;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
-import frc.robot.subsystems.swervedrive.TopArm;
+import frc.robot.subsystems.swervedrive.Arm;
 
 import java.io.File;
 
@@ -43,7 +43,7 @@ public class RobotContainer
   private final EndEffector endEffector = new EndEffector();
   private final Climb climb = new Climb();
   private final Intake intake = new Intake();
-  private final TopArm arm = new TopArm();
+  private final Arm arm = new Arm();
 
   private final SendableChooser<Command> autoChooser;
 
@@ -123,14 +123,16 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
 
-    operatorController.povDown().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
+        operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
         operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));
         operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
-        operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
-        operatorController.y().onTrue(MechanismCommands.moveArm(arm));
-        operatorController.povUp().onTrue(MechanismCommands.moveArmScoring(arm));
-        operatorController.rightTrigger().whileTrue(MechanismCommands.armStraightUp(arm));
-    
+
+        //arm buttons
+        operatorController.povDown().onTrue(MechanismCommands.armZero(arm));
+        operatorController.povRight().onTrue(MechanismCommands.armStraight(arm));
+        operatorController.povUp().onTrue(MechanismCommands.armScoring(arm));
+        operatorController.povLeft().onTrue(MechanismCommands.armFar(arm));
+
         operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
         operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
        

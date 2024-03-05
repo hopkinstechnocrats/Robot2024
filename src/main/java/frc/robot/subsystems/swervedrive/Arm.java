@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.TopArmConstants;
 
-public class TopArm extends SubsystemBase {
+public class Arm extends SubsystemBase {
   // private static final String TopArmConstants = null;
-  CANSparkMax topArmMotor;
+  CANSparkMax firstArmMotor;
   CANSparkMax secondArmMotor;
   SparkMaxPIDController armPIDController;
   SparkMaxPIDController armDownPIDController;
@@ -26,35 +26,35 @@ public class TopArm extends SubsystemBase {
   int storedNode;
 
   /** */
-  public TopArm() {
-    topArmMotor = new CANSparkMax(TopArmConstants.kTopArmMotorPort, MotorType.kBrushless);
+  public Arm() {
+    firstArmMotor = new CANSparkMax(TopArmConstants.kTopArmMotorPort, MotorType.kBrushless);
     secondArmMotor = new CANSparkMax(TopArmConstants.kSecondArmMotorPort, MotorType.kBrushless);
     
-    topArmMotor.restoreFactoryDefaults();
+    firstArmMotor.restoreFactoryDefaults();
     secondArmMotor.restoreFactoryDefaults();
 
     secondArmMotor.setSmartCurrentLimit(40);
-    topArmMotor.setSmartCurrentLimit(40);
+    firstArmMotor.setSmartCurrentLimit(40);
 
-    topArmMotor.setInverted(false);  //TODO invert this
-    secondArmMotor.follow(topArmMotor,true);
+    firstArmMotor.setInverted(false);  //TODO invert this
+    secondArmMotor.follow(firstArmMotor,true);
 //TODO commented out second motor
 
     // topArmMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     // topArmMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
     // topArmMotor.setSoftLimit(SoftLimitDirection.kReverse, -45); // -35
     // topArmMotor.setSoftLimit(SoftLimitDirection.kForward, 215);
-    topArmMotor.setIdleMode(IdleMode.kBrake);
+    firstArmMotor.setIdleMode(IdleMode.kBrake);
     // topArmMotor.setClosedLoopRampRate(TopArmConstants.kClosedLoopRampRate);
     // armPIDController = topArmMotor.getPIDController();
 
     // absDutyCycleEncoder = new DutyCycleEncoder(TopArmConstants.kTopArmEncoderPort);
     // absDutyCycleEncoder.setDistancePerRotation(360);
 
-    relativeEncoder = topArmMotor.getEncoder();
+    relativeEncoder = firstArmMotor.getEncoder();
     relativeEncoder.setPositionConversionFactor(360 / TopArmConstants.kGearRatio);
 
-    armPIDController = topArmMotor.getPIDController();
+    armPIDController = firstArmMotor.getPIDController();
     armPIDController.setP(TopArmConstants.kP);
     armPIDController.setI(TopArmConstants.kI);
     armPIDController.setD(TopArmConstants.kD);
@@ -115,16 +115,16 @@ public class TopArm extends SubsystemBase {
 
   public void resetEncoderPosition() {
     relativeEncoder.setPosition(0);
-    // relativeEncoder.setPosition(encoderPositionAngle());
+    //relativeEncoder.setPosition(encoderPositionAngle());
   }
 
   public void setMotorPosition(double angle) {
-    armPIDController = topArmMotor.getPIDController();
+    armPIDController = firstArmMotor.getPIDController();
     armPIDController.setReference(angle, CANSparkMax.ControlType.kPosition);
   }
 
   public void setMotorDownPosition(double angle) {
-    armDownPIDController = topArmMotor.getPIDController();
+    armDownPIDController = firstArmMotor.getPIDController();
 
     armDownPIDController.setReference(angle, CANSparkMax.ControlType.kPosition);
     armDownPIDController.setP(TopArmConstants.kPDown);
@@ -166,7 +166,7 @@ public class TopArm extends SubsystemBase {
   }
 
   public void stopMotors() {
-    topArmMotor.stopMotor();
+    firstArmMotor.stopMotor();
   }
 
   public void setTrueStowPosition() {
