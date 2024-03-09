@@ -62,8 +62,8 @@ public class EndEffector extends SubsystemBase {
     rollersMotor.set(0);
   }
 
-  public void NoteDetected(){
-    System.out.println(BB.get());//True when sensor detects something
+  public boolean NoteDetected(){
+    return BB.get();//True when sensor detects something
   }
 
 }

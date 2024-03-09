@@ -21,12 +21,25 @@ public class MechanismCommands {
         endEffector);
   }
 
-  public static Command DetectNote(EndEffector endEffector){
-        return Commands.run(
+  public static Command Intake(EndEffector endEffector, Intake intake, boolean detected){
+    
+    if(detected = false){
+      return Commands.run(
         () -> {
-          endEffector.NoteDetected();
-        },
-        endEffector);
+          endEffector.spinRollers();
+          intake.spinIntake();
+          }
+        ,
+        endEffector, intake);
+      }
+    else{return Commands.run(
+        () -> {
+          endEffector.NoSpin(); 
+          intake.noSpinIntake();
+          }
+        ,
+        endEffector, intake);
+    }
 
   }
 
