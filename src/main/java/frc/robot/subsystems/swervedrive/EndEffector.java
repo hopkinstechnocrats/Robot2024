@@ -63,11 +63,7 @@ public class EndEffector extends SubsystemBase {
   }
 
   public void NoteDetected(){
-    BBState = BB.get();
-    
-    if(BBState = false){
-      System.out.println("Note Detected");
-    }
+    System.out.println(BB.get());
   }
 
 }
