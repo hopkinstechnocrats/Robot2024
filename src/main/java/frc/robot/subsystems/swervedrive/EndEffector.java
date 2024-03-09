@@ -6,7 +6,9 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.EndEffectorConstants;
 
 public class EndEffector extends SubsystemBase {
@@ -22,6 +24,9 @@ public class EndEffector extends SubsystemBase {
   NetworkTableEntry setpointLog;
   NetworkTableEntry currentVelLog;
 
+  DigitalInput BB;
+  Boolean BBState;
+
   public EndEffector() {
 
     inst = NetworkTableInstance.getDefault();
@@ -34,6 +39,8 @@ public class EndEffector extends SubsystemBase {
     rollersEncoder.setVelocityConversionFactor(EndEffectorConstants.kGearRatio);
     rollersMotor.setSmartCurrentLimit(15, 30);
     rollersMotor.burnFlash(); // Save settings even after brownout
+
+    BB = new DigitalInput(Constants.EndEffectorConstants.BBDIOPort);
 
     blueWheelMotor = new CANSparkMax(EndEffectorConstants.kBlueMotorPort, MotorType.kBrushless);
     blueWheelEncoder = blueWheelMotor.getEncoder();
@@ -53,6 +60,14 @@ public class EndEffector extends SubsystemBase {
   public void NoSpin() {
     blueWheelMotor.set(0);
     rollersMotor.set(0);
+  }
+
+  public void NoteDetected(){
+    BBState = BB.get();
+    
+    if(BBState = false){
+      System.out.println("Note Detected");
+    }
   }
 
 }

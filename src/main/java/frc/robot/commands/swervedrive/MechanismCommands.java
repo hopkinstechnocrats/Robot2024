@@ -21,6 +21,15 @@ public class MechanismCommands {
         endEffector);
   }
 
+  public static Command DetectNote(EndEffector endEffector){
+        return Commands.run(
+        () -> {
+          endEffector.NoteDetected();
+        },
+        endEffector);
+
+  }
+
   public static Command spinBlueWheel(EndEffector endEffector) {
     return Commands.run(
         () -> {
