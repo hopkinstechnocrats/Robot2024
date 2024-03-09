@@ -63,7 +63,7 @@ public class EndEffector extends SubsystemBase {
   }
 
   public void NoteDetected(){
-    System.out.println(BB.get());
+    System.out.println(BB.get());//True when sensor detects something
   }
 
 }
