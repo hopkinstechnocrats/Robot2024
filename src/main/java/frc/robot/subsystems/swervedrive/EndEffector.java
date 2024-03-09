@@ -47,7 +47,7 @@ public class EndEffector extends SubsystemBase {
   }
 
   public void spinBlueWheel() {
-    blueWheelMotor.set(EndEffectorConstants.blueWheelSpeed);  //TODO made a change here.  maybe wont work
+    blueWheelMotor.set(EndEffectorConstants.blueWheelSpeed);
   }
 
   public void NoSpin() {

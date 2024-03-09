@@ -1,5 +1,4 @@
 package frc.robot.subsystems.swervedrive;
-
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
@@ -35,9 +34,8 @@ public class TopArm extends SubsystemBase {
     secondArmMotor.setSmartCurrentLimit(40);
     topArmMotor.setSmartCurrentLimit(40);
 
-    topArmMotor.setInverted(false);  //TODO invert this
+    topArmMotor.setInverted(false);
     secondArmMotor.follow(topArmMotor,true);
-//TODO commented out second motor
 
     // topArmMotor.enableSoftLimit(SoftLimitDirection.kForward, true);
     // topArmMotor.enableSoftLimit(SoftLimitDirection.kReverse, true);
