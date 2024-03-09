@@ -128,7 +128,6 @@ public class RobotContainer
         operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
         operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
         operatorController.y().onTrue(MechanismCommands.moveArm(arm));
-        operatorController.povUp().onTrue(MechanismCommands.moveArmScoring(arm));
         operatorController.rightTrigger().whileTrue(MechanismCommands.armStraightUp(arm));
         operatorController.povUp().whileTrue(MechanismCommands.armScoringPosition(arm));
     
