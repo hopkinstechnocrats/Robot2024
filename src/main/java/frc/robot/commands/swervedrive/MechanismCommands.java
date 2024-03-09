@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.swervedrive.Climb;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
+import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import frc.robot.subsystems.swervedrive.TopArm;
 
 
@@ -107,5 +108,13 @@ public class MechanismCommands {
           climb.noClimb();
         },
         climb);
+  }
+
+  public static Command absoluteEncoderPosition(SwerveSubsystem drive) {
+    return Commands.run(
+        () -> {
+          drive.printAnalogs();
+        },
+        drive);
   }
 }
