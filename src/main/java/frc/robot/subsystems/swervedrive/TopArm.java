@@ -16,7 +16,6 @@ public class TopArm extends SubsystemBase {
   CANSparkMax secondArmMotor;
   SparkMaxPIDController armPIDController;
   SparkMaxPIDController armDownPIDController;
-  SparkMaxPIDController armDownPIDController2;
 
   DutyCycleEncoder absDutyCycleEncoder;
   RelativeEncoder relativeEncoder;
@@ -118,9 +117,18 @@ public class TopArm extends SubsystemBase {
     // relativeEncoder.setPosition(encoderPositionAngle());
   }
 
-  public void setMotorPosition(double angle) {
-    armPIDController = topArmMotor.getPIDController();
-    armPIDController.setReference(angle, CANSparkMax.ControlType.kPosition);
+  public void setMotorPosition(double angle) {    
+    armDownPIDController = topArmMotor.getPIDController();
+
+    armDownPIDController.setReference(angle, CANSparkMax.ControlType.kPosition);
+    armDownPIDController.setP(TopArmConstants.kP);
+    armDownPIDController.setI(TopArmConstants.kI);
+    armDownPIDController.setD(TopArmConstants.kD);
+    armDownPIDController.setIZone(TopArmConstants.kIntegralZone);
+    armDownPIDController.setFF(TopArmConstants.kFeedForward);
+    armDownPIDController.setOutputRange(TopArmConstants.kMinOutput, TopArmConstants.kMaxOutput);
+
+    armDownPIDController.setReference(angle, CANSparkMax.ControlType.kPosition);
   }
 
   public void setMotorDownPosition(double angle) {
