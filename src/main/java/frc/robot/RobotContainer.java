@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.swervedrive.AutoRoutines;
 import frc.robot.commands.swervedrive.MechanismCommands;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.Climb;
@@ -123,16 +124,23 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
 
-    operatorController.povDown().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
-        operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));
-        operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
-        operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
-        operatorController.y().onTrue(MechanismCommands.moveArm(arm));
-        operatorController.rightTrigger().whileTrue(MechanismCommands.armStraightUp(arm));
-        operatorController.povUp().whileTrue(MechanismCommands.armScoringPosition(arm));
+        operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
+        operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
     
-        operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
-        operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
+        //not functional
+        operatorController.leftBumper().whileTrue(AutoRoutines.autoClimbUp(climb));
+        operatorController.leftTrigger().whileTrue(AutoRoutines.autoClimbDown(climb));
+        
+        operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
+
+        operatorController.rightBumper().whileTrue(AutoRoutines.autoScore(arm, endEffector)); //not working
+        operatorController.rightTrigger().whileTrue(MechanismCommands.spinIntakeAndRollers(intake, endEffector));
+
+
+        operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
+        operatorController.povRight().whileTrue(MechanismCommands.armStraight(arm));
+        operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
+        operatorController.povLeft().whileTrue(MechanismCommands.armFar(arm));
        
 
     // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());

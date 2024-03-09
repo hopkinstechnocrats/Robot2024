@@ -50,6 +50,14 @@ public class EndEffector extends SubsystemBase {
     blueWheelMotor.set(EndEffectorConstants.blueWheelSpeed);  //TODO made a change here.  maybe wont work
   }
 
+   public void reverseSpinRollers() {
+    rollersMotor.set(-1*EndEffectorConstants.rollerSpeed);
+  }
+
+   public void reverseSpinBlueWheel() {
+    blueWheelMotor.set(-1*EndEffectorConstants.blueWheelSpeed);  //TODO made a change here.  maybe wont work
+  }
+
   public void NoSpin() {
     blueWheelMotor.set(0);
     rollersMotor.set(0);
