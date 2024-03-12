@@ -63,7 +63,7 @@ public class MechanismCommands {
         arm);
   }
 
-  public static Command armFar(TopArm arm) {
+  public static Command armScoringLess(TopArm arm) {
     return Commands.run(
         () -> {
           arm.setMotorPosition(130); //TO DO: test
@@ -71,10 +71,10 @@ public class MechanismCommands {
         arm);
   }
 
-  public static Command armStraight(TopArm arm) {
+  public static Command armScoringMore(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(100); //TO DO: test
+          arm.setMotorPosition(120); //TO DO: test
         },
         arm);
   }
