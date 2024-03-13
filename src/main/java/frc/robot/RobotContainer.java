@@ -128,8 +128,8 @@ public class RobotContainer
         operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
     
         //not functional
-        operatorController.leftBumper().whileTrue(AutoRoutines.autoClimbUp(climb));
-        operatorController.leftTrigger().whileTrue(AutoRoutines.autoClimbDown(climb));
+        operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb).withTimeout(4));
+        operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb).withTimeout(4));
         
         operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
@@ -138,9 +138,9 @@ public class RobotContainer
 
 
         operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
-        operatorController.povRight().whileTrue(MechanismCommands.armStraight(arm));
+        operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
+        operatorController.povRight().whileTrue(MechanismCommands.armSoringMore(arm));
         operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
-        operatorController.povLeft().whileTrue(MechanismCommands.armFar(arm));
        
 
     // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());

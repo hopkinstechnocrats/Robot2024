@@ -66,12 +66,16 @@ public class MechanismCommands {
   public static Command armScoringLess(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(130); //TO DO: test
+          arm.setMotorPosition(110); //TO DO: test
         },
         arm);
   }
 
+<<<<<<< Updated upstream
   public static Command armScoringMore(TopArm arm) {
+=======
+  public static Command armSoringMore(TopArm arm) {
+>>>>>>> Stashed changes
     return Commands.run(
         () -> {
           arm.setMotorPosition(120); //TO DO: test
