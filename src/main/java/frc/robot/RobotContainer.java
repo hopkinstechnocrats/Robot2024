@@ -5,9 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
+//import edu.wpi.first.math.geometry.Pose2d;
+//import edu.wpi.first.math.geometry.Rotation2d;
+//import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -124,26 +124,26 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
 
-        operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
-        operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
+    operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
+    operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
+
+    //not functional
+    operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb).withTimeout(0.2));
+    operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb).withTimeout(0.2));
     
-        //not functional
-        operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb).withTimeout(4));
-        operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb).withTimeout(4));
-        
-        operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
+    operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
-        operatorController.rightBumper().whileTrue(AutoRoutines.autoScore(arm, endEffector)); //not working
-        operatorController.rightTrigger().whileTrue(MechanismCommands.spinIntakeAndRollers(intake, endEffector));
+    operatorController.rightBumper().whileTrue(AutoRoutines.autoScore(arm, endEffector)); //not working
+    operatorController.rightTrigger().whileTrue(MechanismCommands.spinIntakeAndRollers(intake, endEffector));
 
 
-        operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
-        operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
-        operatorController.povRight().whileTrue(MechanismCommands.armSoringMore(arm));
-        operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
-       
+    operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
+    operatorController.povRight().whileTrue(MechanismCommands.armScoringMore(arm));
+    operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
+    operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
+   
 
-    // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
+// driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
   }
 
   /**
@@ -157,7 +157,7 @@ public class RobotContainer
   {
     // An example command will be run in autonomous
     return drivebase.getAutonomousCommand("New Auto");
-    //return autoChooser.getSelected(); //TODO uncomment and comment aline above
+    //return autoChooser.getSelected();
   
 
   }
