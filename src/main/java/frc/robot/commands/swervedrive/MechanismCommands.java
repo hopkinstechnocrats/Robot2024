@@ -53,13 +53,7 @@ public class MechanismCommands {
         intake);
   }
 
-  public static Command moveArm(TopArm arm) {
-    return Commands.run(
-        () -> {
-          arm.setMotorDownPosition(3);  //TO DO: was 0
-        },
-        arm);
-  }
+  
 
   public static Command moveArmFurther(TopArm arm) {
     return Commands.run(
