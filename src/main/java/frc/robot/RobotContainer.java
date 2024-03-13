@@ -131,8 +131,6 @@ public class RobotContainer
     operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb).withTimeout(0.2));
     operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb).withTimeout(0.2));
     
-    operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
-
     operatorController.rightBumper().whileTrue(AutoRoutines.autoScore(arm, endEffector)); //not working
     operatorController.rightTrigger().whileTrue(MechanismCommands.spinIntakeAndRollers(intake, endEffector));
 

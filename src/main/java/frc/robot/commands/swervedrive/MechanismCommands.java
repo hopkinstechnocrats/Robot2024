@@ -3,6 +3,7 @@ package frc.robot.commands.swervedrive;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.swervedrive.Arm;
 import frc.robot.subsystems.swervedrive.Climb;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
@@ -136,5 +137,14 @@ public class MechanismCommands {
         },
         endEffector);
   }
+
+  public static Command newArmPosition(Arm arm) {
+    return Commands.run(
+        () -> {
+          arm.moveArmToPosition();
+        },
+        arm);
+  }
+
 
 }
