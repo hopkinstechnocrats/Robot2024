@@ -21,9 +21,9 @@ public class MechanismCommands {
         endEffector);
   }
 
-  public static Command Intake(EndEffector endEffector, Intake intake, boolean detected){
+  public static Command Intake(EndEffector endEffector, Intake intake){
     
-    if(detected = false){
+    if(endEffector.NoteDetected()){
       return Commands.run(
         () -> {
           endEffector.spinRollers();
@@ -32,14 +32,17 @@ public class MechanismCommands {
         ,
         endEffector, intake);
       }
-    else{return Commands.run(
+    else{
+      return Commands.run(
         () -> {
           endEffector.NoSpin(); 
           intake.noSpinIntake();
           }
         ,
         endEffector, intake);
+        
     }
+    
 
   }
 
