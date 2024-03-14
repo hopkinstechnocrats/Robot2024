@@ -56,7 +56,7 @@ public class MechanismCommands {
   public static Command armZero(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorDownPosition(110); //TO DO: test
+          arm.setMotorDownPosition(0); //TO DO: test
         },
         arm);
   }
