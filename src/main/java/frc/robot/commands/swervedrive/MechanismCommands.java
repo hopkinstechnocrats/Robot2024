@@ -56,7 +56,7 @@ public class MechanismCommands {
   public static Command armZero(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(110); //TO DO: test
+          arm.setMotorDownPosition(110); //TO DO: test
         },
         arm);
   }
@@ -64,7 +64,7 @@ public class MechanismCommands {
   public static Command armScoringLess(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(110); //TO DO: test
+          arm.setMotorDownPosition(110); //TO DO: test
         },
         arm);
   }
@@ -72,7 +72,7 @@ public class MechanismCommands {
   public static Command armScoring(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(115); //TO DO: test
+          arm.setMotorDownPosition(115); //TO DO: test
         },
         arm);
   }
@@ -80,7 +80,7 @@ public class MechanismCommands {
   public static Command armScoringMore(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(120); //TO DO: test
+          arm.setMotorDownPosition(120); //TO DO: test
         },
         arm);
   }
