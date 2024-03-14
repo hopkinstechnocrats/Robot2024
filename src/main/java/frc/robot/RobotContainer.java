@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.swervedrive.AutoRoutines;
 import frc.robot.commands.swervedrive.MechanismCommands;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.Climb;
@@ -128,12 +127,11 @@ public class RobotContainer
     operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
 
     //not functional
-    operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb).withTimeout(0.2));
-    operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb).withTimeout(0.2));
+    operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
+    operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
-    operatorController.rightBumper().whileTrue(AutoRoutines.autoScore(arm, endEffector)); //not working
     operatorController.rightTrigger().whileTrue(MechanismCommands.spinIntakeAndRollers(intake, endEffector));
 
 
