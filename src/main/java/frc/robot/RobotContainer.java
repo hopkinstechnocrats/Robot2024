@@ -8,6 +8,8 @@ import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.geometry.Pose2d;
 //import edu.wpi.first.math.geometry.Rotation2d;
 //import edu.wpi.first.math.geometry.Translation2d;
+import frc.robot.subsystems.swervedrive.TopArm;
+import frc.robot.Constants.IntakeConstants;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -164,4 +166,8 @@ public class RobotContainer
     drivebase.setMotorBrake(brake);
   }
 
+  protected void execute() {
+    //SmartDashboard.putBoolean("Backleft Encoder", TopArm.getScoringPosition());
+  //TODO check wiht robor
+  }
 }
