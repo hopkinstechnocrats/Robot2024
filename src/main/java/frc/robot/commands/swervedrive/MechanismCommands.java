@@ -21,7 +21,7 @@ public class MechanismCommands {
         endEffector);
   }
 
-  public static Command spinBlueWheel(EndEffector endEffector) {
+  public static Command spinBlueWheels(EndEffector endEffector) {
     return Commands.run(
         () -> {
           endEffector.spinBlueWheel();

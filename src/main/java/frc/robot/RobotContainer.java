@@ -125,6 +125,7 @@ public class RobotContainer
 
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
     operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
+    operatorController.a().whileTrue(MechanismCommands.spinBlueWheels(endEffector));
 
     //not functional
     operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
