@@ -12,11 +12,23 @@ import frc.robot.subsystems.swervedrive.TopArm;
 public class MechanismCommands {
   private MechanismCommands() {}
 
-  public static Command moveEndEffector(EndEffector endEffector) {
+  public static Command notMoveEndEffector(EndEffector endEffector) {
 
     return Commands.run(
         () -> {
           endEffector.NoSpin();
+          
+        },
+        endEffector);
+  }
+
+  public static Command moveEndEffector(EndEffector endEffector) {
+
+    return Commands.run(
+        () -> {
+          endEffector.spinBlueWheel();
+          endEffector.spinRollers();
+          
         },
         endEffector);
   }
@@ -28,6 +40,7 @@ public class MechanismCommands {
         },
         endEffector);
   }
+
 
   public static Command spinRollers(EndEffector endEffector) {
     return Commands.run(

@@ -103,7 +103,7 @@ public class RobotContainer
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation() ? driveFieldOrientedAngularVelocity : driveFieldOrientedDirectAngleSim);
 
-        endEffector.setDefaultCommand(MechanismCommands.moveEndEffector(endEffector));
+        endEffector.setDefaultCommand(MechanismCommands.notMoveEndEffector(endEffector));
         intake.setDefaultCommand(MechanismCommands.moveNoIntake(intake));
         climb.setDefaultCommand(MechanismCommands.noClimb(climb));
     
@@ -125,7 +125,8 @@ public class RobotContainer
 
     operatorController.povDown().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
         operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));
-        operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
+        operatorController.rightBumper().onTrue(MechanismCommands.spinBlueWheel(endEffector)
+          .withTimeout(0.5).andThen(MechanismCommands.moveEndEffector(endEffector).withTimeout(0.5)));
         operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
         operatorController.y().onTrue(MechanismCommands.moveArm(arm));
         operatorController.rightTrigger().whileTrue(MechanismCommands.armStraightUp(arm));
