@@ -1,4 +1,4 @@
-package frc.robot.subsystems.swervedrive;
+package frc.robot.subsystems.swervedrive.climb;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimberConstants;
 
-public class Climber extends SubsystemBase{
+public class ClimberIO extends SubsystemBase{
     
     private String name;
     private double kP;
@@ -20,7 +20,7 @@ public class Climber extends SubsystemBase{
     static WPI_TalonFX motor;
     private AnalogPotentiometer stringClimber;
 
-    public Climber(String name, int motorPort, double kP, double kI, double kD, double kEncoderTicksPerRevolution, double maxVelocity, double maxAcceleration){
+    public ClimberIO(String name, int motorPort, double kP, double kI, double kD, double kEncoderTicksPerRevolution, double maxVelocity, double maxAcceleration){
         this.name = name;
         stringClimber = new AnalogPotentiometer(0, 2.037, 0); //does fullRange hold true?
         kP = ClimberConstants.kP;

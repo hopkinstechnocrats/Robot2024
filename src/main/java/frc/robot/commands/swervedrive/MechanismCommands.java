@@ -3,11 +3,12 @@ package frc.robot.commands.swervedrive;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.subsystems.swervedrive.Climb;
-import frc.robot.subsystems.swervedrive.Climber;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
 import frc.robot.subsystems.swervedrive.TopArm;
+import frc.robot.subsystems.swervedrive.climb.Climb;
+import frc.robot.subsystems.swervedrive.climb.Climber;
+import frc.robot.subsystems.swervedrive.climb.ClimberIO;
 
 
 public class MechanismCommands {
@@ -138,10 +139,18 @@ public class MechanismCommands {
         endEffector);
   }
 
-  public static Command climberMove(Climber climb) {
+  public static Command autoClimbUp(Climber climb) {
     return Commands.run(
         () -> {
           climb.setPosition(10); //TO DO: test
+        },
+        climb);
+  }
+
+  public static Command autoClimbDown(Climber climb) {
+    return Commands.run(
+        () -> {
+          climb.zeroClimberPosition(); //TO DO: test
         },
         climb);
   }
