@@ -123,19 +123,25 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
 
-    operatorController.povDown().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
-        operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));
-        operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
-        operatorController.x().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
-        operatorController.y().onTrue(MechanismCommands.moveArm(arm));
-        operatorController.rightTrigger().whileTrue(MechanismCommands.armStraightUp(arm));
-        operatorController.povUp().whileTrue(MechanismCommands.armScoringPosition(arm));
-    
-        operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
-        operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
-       
+    operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
+    operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
 
-    // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
+    //not functional
+    operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
+    operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
+    
+    operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
+
+    operatorController.rightTrigger().whileTrue(MechanismCommands.spinIntakeAndRollers(intake, endEffector));
+
+
+    operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
+    operatorController.povRight().whileTrue(MechanismCommands.armScoringMore(arm));
+    operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
+    operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
+   
+
+// driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
   }
 
   /**

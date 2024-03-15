@@ -68,13 +68,13 @@ public final class Constants
 
   public static final class TopArmConstants {
     public static final int kTopArmMotorPort = 18; // not true
-    public static final double kP = 0045;
+    public static final double kP = 0.0045;
     public static final double kI = 0;
     public static final double kD = 0;
     public static final double kIntegralZone = 15;
     public static final double kFeedForward = 0;
-    public static final double kMinOutput = -.5;
-    public static final double kMaxOutput = 0.5;
+    public static final double kMinOutput = -.2; //minimized it for arm to move safelier
+    public static final double kMaxOutput = 0.2;
 
     public static final double kPDown = .0001;
     public static final double kGearRatio = 80; // changed it because the angle was off cuz gear ratio was off

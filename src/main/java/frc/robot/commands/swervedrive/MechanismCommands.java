@@ -53,34 +53,34 @@ public class MechanismCommands {
         intake);
   }
 
-  public static Command moveArm(TopArm arm) {
+  public static Command armZero(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorDownPosition(0);
+          arm.setMotorDownPosition(0); //TO DO: test
         },
         arm);
   }
 
-  public static Command moveArmFurther(TopArm arm) {
+  public static Command armScoringLess(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(130); //TO DO: test
+          arm.setMotorDownPosition(110); //TO DO: test
         },
         arm);
   }
 
-  public static Command armStraightUp(TopArm arm) {
+  public static Command armScoring(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(100); //TO DO: test
+          arm.setMotorDownPosition(115); //TO DO: test
         },
         arm);
   }
 
-  public static Command armScoringPosition(TopArm arm) {
+  public static Command armScoringMore(TopArm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(115); //TO DO: test
+          arm.setMotorDownPosition(120); //TO DO: test
         },
         arm);
   }
@@ -108,4 +108,33 @@ public class MechanismCommands {
         },
         climb);
   }
+
+  public static Command reverseEverything(EndEffector endEffector, Intake intake) {
+    return Commands.run(
+        () -> {
+          intake.reverseSpinIntake();
+          endEffector.reverseSpinBlueWheel();
+          endEffector.reverseSpinRollers();
+        },
+        intake, endEffector);
+  }
+
+  public static Command spinIntakeAndRollers(Intake intake, EndEffector endEffector) {
+    return Commands.run(
+        () -> {
+          intake.spinIntake();
+          endEffector.spinRollers();
+        },
+        endEffector, intake);
+  }
+
+  public static Command sendIt(EndEffector endEffector) {
+    return Commands.run(
+        () -> {
+          endEffector.spinRollers();
+          endEffector.spinBlueWheel();
+        },
+        endEffector);
+  }
+
 }
