@@ -123,23 +123,25 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
 
-    //operatorController.povDown().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
-        operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));
-        operatorController.rightBumper().whileTrue(MechanismCommands.moveInIntake(intake));
-        
+    operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
+    operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
 
-        operatorController.povLeft().onTrue(MechanismCommands.moveArmFurther(arm)); // should be whileTrue??
-       
-        
-        operatorController.povRight().whileTrue(MechanismCommands.armStraightUp(arm));
-        operatorController.povDown().whileTrue(MechanismCommands.armScoringPosition(arm));
+    //not functional
+    operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
+    operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
     
-        operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
-        operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
-       
+    operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
+
+    operatorController.rightTrigger().whileTrue(MechanismCommands.spinIntakeAndRollers(intake, endEffector));
 
 
-    // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
+    operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
+    operatorController.povRight().whileTrue(MechanismCommands.armScoringMore(arm));
+    operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
+    operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
+   
+
+// driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
   }
 
   /**
