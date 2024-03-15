@@ -138,13 +138,7 @@ public class MechanismCommands {
         endEffector);
   }
 
-  public static Command newArmPosition(Arm arm) {
-    return Commands.run(
-        () -> {
-          arm.moveArmToPosition();
-        },
-        arm);
-  }
+
 
 
 }
