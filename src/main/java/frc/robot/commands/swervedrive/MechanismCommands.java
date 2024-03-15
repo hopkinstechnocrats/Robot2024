@@ -3,11 +3,12 @@ package frc.robot.commands.swervedrive;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.subsystems.swervedrive.Arm;
 import frc.robot.subsystems.swervedrive.Climb;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
-import frc.robot.subsystems.swervedrive.TopArm;
+import frc.robot.subsystems.swervedrive.arm.Arm;
+import frc.robot.subsystems.swervedrive.arm.ArmSubsystem;
+import frc.robot.subsystems.swervedrive.arm.TopArm;
 
 
 public class MechanismCommands {
@@ -54,34 +55,34 @@ public class MechanismCommands {
         intake);
   }
 
-  public static Command armZero(TopArm arm) {
+  public static Command armZero(ArmSubsystem arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(110); //TO DO: test
+          arm.setPosition(0); 
         },
         arm);
   }
 
-  public static Command armScoringLess(TopArm arm) {
+  public static Command armScoringLess(ArmSubsystem arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(110); //TO DO: test
+          arm.setPosition(10); //was 110 degrees
         },
         arm);
   }
 
-  public static Command armScoring(TopArm arm) {
+  public static Command armScoring(ArmSubsystem arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(115); //TO DO: test
+          arm.setPosition(15);//was 115 degrees
         },
         arm);
   }
 
-  public static Command armScoringMore(TopArm arm) {
+  public static Command armScoringMore(ArmSubsystem arm) {
     return Commands.run(
         () -> {
-          arm.setMotorPosition(120); //TO DO: test
+          arm.setPosition(20); //was 120 degrees
         },
         arm);
   }
