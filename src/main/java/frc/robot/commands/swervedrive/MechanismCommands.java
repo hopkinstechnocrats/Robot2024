@@ -23,7 +23,7 @@ public class MechanismCommands {
 
   public static Command Intake(EndEffector endEffector, Intake intake){
     
-    if(endEffector.NoteDetected()){
+    
       return Commands.run(
         () -> {
           endEffector.spinRollers();
@@ -31,19 +31,7 @@ public class MechanismCommands {
           }
         ,
         endEffector, intake);
-      }
-    else{
-      return Commands.run(
-        () -> {
-          endEffector.NoSpin(); 
-          intake.noSpinIntake();
-          }
-        ,
-        endEffector, intake);
-        
-    }
-    
-
+      
   }
 
   public static Command spinBlueWheel(EndEffector endEffector) {

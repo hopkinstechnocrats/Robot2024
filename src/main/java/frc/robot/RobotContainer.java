@@ -122,7 +122,7 @@ public class RobotContainer
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-    driverXbox.b().whileTrue(MechanismCommands.Intake(endEffector, intake));
+    driverXbox.b().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected()));
 
     operatorController.povDown().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
         operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));

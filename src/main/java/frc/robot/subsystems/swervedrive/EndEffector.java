@@ -1,6 +1,9 @@
 package frc.robot.subsystems.swervedrive;
 
 import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import java.util.function.BooleanSupplier;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.networktables.NetworkTable;
@@ -25,7 +28,7 @@ public class EndEffector extends SubsystemBase {
   NetworkTableEntry currentVelLog;
 
   DigitalInput BB;
-  Boolean BBState;
+  BooleanSupplier BBState;
 
   public EndEffector() {
 
@@ -62,9 +65,10 @@ public class EndEffector extends SubsystemBase {
     rollersMotor.set(0);
   }
 
-  public Boolean NoteDetected(){
+  public BooleanSupplier NoteDetected(){
     //System.out.println(BB.get());
-    return BB.get();//True when sensor detects something
+    return BB::get;//True when sensor detects something
+    
     
     
   }
