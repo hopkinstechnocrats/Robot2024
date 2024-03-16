@@ -28,6 +28,8 @@ import frc.robot.subsystems.swervedrive.TopArm;
 import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.PathPlannerPath;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -59,6 +61,7 @@ public class RobotContainer
   {
      autoChooser = AutoBuilder.buildAutoChooser();
      SmartDashboard.putData("Auto Chooser", autoChooser);
+     autoChooser.addOption("Do Nothing", DoNothing());
     // Configure the trigger bindings
     configureBindings();
 
@@ -149,15 +152,19 @@ public class RobotContainer
    *
    * @return the command to run in autonomous
    */
-
   
   public Command getAutonomousCommand()
   {
-    // An example command will be run in autonomous
-    return drivebase.getAutonomousCommand("New Auto");
-    //return autoChooser.getSelected();
-  
+    PathPlannerPath path = PathPlannerPath.fromPathFile("Do Nothing");
+    return AutoBuilder.followPath(path);
 
+        // An example command will be run in autonomous
+    //return drivebase.getAutonomousCommand("New Auto");
+    //return autoChooser.getSelected();
+  }
+
+  public Command DoNothing(){
+    return new PathPlannerAuto("Do Nothing");
   }
 
   public void setDriveMode()
