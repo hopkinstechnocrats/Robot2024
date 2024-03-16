@@ -32,13 +32,13 @@ public class EndEffector extends SubsystemBase {
     rollersMotor = new CANSparkMax(EndEffectorConstants.kRollerMotorPort, MotorType.kBrushless);
     rollersEncoder = rollersMotor.getEncoder();
     rollersEncoder.setVelocityConversionFactor(EndEffectorConstants.kGearRatio);
-    rollersMotor.setSmartCurrentLimit(15, 30);
+    rollersMotor.setSmartCurrentLimit(40, 40);
     rollersMotor.burnFlash(); // Save settings even after brownout
 
     blueWheelMotor = new CANSparkMax(EndEffectorConstants.kBlueMotorPort, MotorType.kBrushless);
     blueWheelEncoder = blueWheelMotor.getEncoder();
     blueWheelEncoder.setVelocityConversionFactor(EndEffectorConstants.kGearRatio);
-    blueWheelMotor.setSmartCurrentLimit(15, 30);
+    blueWheelMotor.setSmartCurrentLimit(40, 40);
     blueWheelMotor.burnFlash(); // Save settings even after brownout
   }
 
