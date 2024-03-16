@@ -10,6 +10,8 @@ import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.ReplanningConfig;
+import com.revrobotics.AbsoluteEncoder;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -21,6 +23,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
 import frc.robot.Constants.AutonConstants;
@@ -72,7 +75,7 @@ public class SwerveSubsystem extends SubsystemBase
     System.out.println("\t\"angle\": " + angleConversionFactor + ",");
     System.out.println("\t\"drive\": " + driveConversionFactor);
     System.out.println("}");
-
+    
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.NONE;
     try
@@ -88,6 +91,7 @@ public class SwerveSubsystem extends SubsystemBase
     swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for simulations since it causes discrepancies not seen in real life.
     setupPathPlanner();
     swerveDrive.setOdometryPeriod(0.100);
+
   }
 
   /**
@@ -101,6 +105,7 @@ public class SwerveSubsystem extends SubsystemBase
     swerveDrive = new SwerveDrive(driveCfg, controllerCfg, maximumSpeed);
   }
 
+  
   /**
    * Setup AutoBuilder for PathPlanner.
    */
@@ -396,19 +401,25 @@ public class SwerveSubsystem extends SubsystemBase
 
   public void printAnalogs()
   {
+
     for (SwerveModule module : swerveDrive.getModules())
     {
+    
       if (module.getAbsoluteEncoder() == null)
       {
         throw new RuntimeException("Absolute encoders are required to find the coupling ratio.");
       }
+
       SwerveAbsoluteEncoder absoluteEncoder = module.getAbsoluteEncoder();
+      SmartDashboard.putNumber("absolute encoder absolute position", absoluteEncoder.getAbsolutePosition());
+
       if (absoluteEncoder.readingError)
       {
         throw new RuntimeException("Absolute encoder encountered a reading error please debug.");
       }
       System.out.println("Fetching the current absolute encoder position.");
       System.out.println(absoluteEncoder.getAbsolutePosition());
+      SmartDashboard.putNumber("encoder absolute position", absoluteEncoder.getAbsolutePosition());
 
     }
 
