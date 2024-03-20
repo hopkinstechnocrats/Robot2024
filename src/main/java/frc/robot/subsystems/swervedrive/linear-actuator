@@ -7,10 +7,10 @@ public class LinearServo extends Servo{
  double setPos;
  double curPos;
 
- double m_speed = 1; //TODO: get number
- double m_length = 2; //TODO: get number
- double setPos = 3; //TODO: get number
- double curPos = 4; //TODO: get number
+ //double m_speed = 1; //TODO get number
+ //double m_length = 2; //TODO get number
+ double setPos = 3; //TODO get number
+ double curPos = 4; //TODO get number
 
  /**
  * Parameters for L16-R Actuonix Linear Actuators
@@ -26,4 +26,3 @@ public class LinearServo extends Servo{
  m_speed = speed;
  }
 } 
- /**
