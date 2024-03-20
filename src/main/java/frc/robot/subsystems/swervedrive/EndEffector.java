@@ -1,12 +1,16 @@
 package frc.robot.subsystems.swervedrive;
 
+import java.util.function.BooleanSupplier;
+
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.EndEffectorConstants;
 
 public class EndEffector extends SubsystemBase {
@@ -22,12 +26,16 @@ public class EndEffector extends SubsystemBase {
   NetworkTableEntry setpointLog;
   NetworkTableEntry currentVelLog;
 
+  DigitalInput BB;
+
   public EndEffector() {
 
     inst = NetworkTableInstance.getDefault();
     table = inst.getTable("EndEffector");
     setpointLog = table.getEntry("Setpoint (RPM)");
     currentVelLog = table.getEntry("Current Velocity (RPM)");
+
+    BB = new DigitalInput(Constants.EndEffectorConstants.BBDIOPort);
 
     rollersMotor = new CANSparkMax(EndEffectorConstants.kRollerMotorPort, MotorType.kBrushless);
     rollersEncoder = rollersMotor.getEncoder();
@@ -61,6 +69,12 @@ public class EndEffector extends SubsystemBase {
   public void NoSpin() {
     blueWheelMotor.set(0);
     rollersMotor.set(0);
+  }
+
+   public BooleanSupplier NoteDetected(){
+    //System.out.println(BB.get());
+    return BB::get;//True when sensor detects something
+    
   }
 
 }

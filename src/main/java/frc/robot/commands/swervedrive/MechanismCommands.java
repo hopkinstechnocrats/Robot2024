@@ -22,6 +22,33 @@ public class MechanismCommands {
         endEffector);
   }
 
+  public static Command Intake(EndEffector endEffector, Intake intake){
+    
+    
+    return Commands.run(
+      () -> {
+        endEffector.spinRollers();
+        intake.spinIntake();
+        }
+      ,
+      endEffector, intake);
+    
+}
+
+public static Command fixNotePosition(EndEffector endEffector, Intake intake){
+    
+    
+  return Commands.run(
+    () -> {
+      endEffector.reverseSpinRollers();
+      endEffector.reverseSpinBlueWheel();
+      intake.reverseSpinIntake();
+      }
+    ,
+    endEffector, intake);
+  
+}
+
   public static Command spinBlueWheel(EndEffector endEffector) {
     return Commands.run(
         () -> {
