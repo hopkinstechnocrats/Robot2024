@@ -16,6 +16,10 @@ public class Intake extends SubsystemBase {
     intakeMotor.set(IntakeConstants.intakeSpeed);
   }
 
+  public void reverseSpinIntake() {
+    intakeMotor.set(-1*IntakeConstants.intakeSpeed);
+  }
+
   public void noSpinIntake() {
     intakeMotor.set(0);
   }
