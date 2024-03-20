@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.MechanismCommands;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
+import frc.robot.subsystems.swervedrive.Arm;
 import frc.robot.subsystems.swervedrive.Climb;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
@@ -43,7 +44,7 @@ public class RobotContainer
   private final EndEffector endEffector = new EndEffector();
   private final Climb climb = new Climb();
   private final Intake intake = new Intake();
-  private final TopArm arm = new TopArm();
+  private final Arm arm = new Arm();
 
   private final SendableChooser<Command> autoChooser;
 

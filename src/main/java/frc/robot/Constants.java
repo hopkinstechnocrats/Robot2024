@@ -66,6 +66,11 @@ public final class Constants
     public static final double intakeSpeed = 1;
   }
 
+  public static final class ArmConstants{
+    public static final int leaderDeviceID = 18;
+    public static final int followerDeviceID = 17;
+  }
+
   public static final class TopArmConstants {
     public static final int kTopArmMotorPort = 18; // not true
     public static final double kP = 0.0045;
