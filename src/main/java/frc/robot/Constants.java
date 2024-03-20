@@ -66,7 +66,7 @@ public final class Constants
 
   public static final class IntakeConstants {
     public static final int kIntakeMotorPort = 19;
-    public static final double intakeSpeed = 0.8;
+    public static final double intakeSpeed = 1;
   }
 
   public static final class TopArmConstants {

@@ -123,7 +123,7 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
     driverXbox.b().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
-    .andThen(MechanismCommands.fixNotePosition(endEffector).withTimeout(0.2)));
+    .andThen(MechanismCommands.fixNotePosition(endEffector).withTimeout(0.13)));
 
     operatorController.povDown().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
         operatorController.b().whileTrue(MechanismCommands.spinRollers(endEffector));
