@@ -34,16 +34,17 @@ public class MechanismCommands {
       
   }
 
-  public static Command fixNotePosition(EndEffector endEffector){
+  public static Command fixNotePosition(EndEffector endEffector, Intake intake){
     
     
       return Commands.run(
         () -> {
           endEffector.reverseSpinRollers();
           endEffector.reverseSpinBlueWheel();
+          intake.reverseSpinIntake();
           }
         ,
-        endEffector);
+        endEffector, intake);
       
   }
 
