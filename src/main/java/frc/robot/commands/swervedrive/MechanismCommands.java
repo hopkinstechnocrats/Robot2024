@@ -105,6 +105,14 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         arm);
   }
 
+  public static Command speakerScoring(Arm arm) {
+    return Commands.run(
+        () -> {
+          arm.setMotorDownPosition(15.5); //TO DO: test
+        },
+        arm);
+  }
+
   public static Command armScoringMore(Arm arm) {
     return Commands.run(
         () -> {
