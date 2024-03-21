@@ -69,30 +69,22 @@ public final class Constants
     public static final double intakeSpeed = 1;
   }
 
-  public static final class TopArmConstants {
-    public static final int kTopArmMotorPort = 18; // not true
-    public static final double kP = 0.0045;
+  public static final class ArmConstants {
+    public static final int m_leaderMotor = 18; 
+    public static final double kP = 0.000025;
     public static final double kI = 0;
     public static final double kD = 0;
-    public static final double kIntegralZone = 15;
-    public static final double kFeedForward = 0;
-    public static final double kMinOutput = -.2; //minimized it for arm to move safelier
-    public static final double kMaxOutput = 0.2;
-
-    public static final double kPDown = .0001;
-    public static final double kGearRatio = 80; // changed it because the angle was off cuz gear ratio was off
+    public static final double kIz = 0;
+    public static final double kFF = 0.000156;
+    public static final double kMinOutput = -1;
+    public static final double kMaxOutput = 1;
 
     public static final double kAbsEncoderOffset = 0;
     public static final boolean kAbsEncoderReversed = false;
-    public static final double kClosedLoopRampRate = 0.5;
 
-    public static final double kMidNodeScorePosCone = 7;
-    public static final double kMidNodeScorePosCube = 5;
+    public static final double kGearRatio = 80;
 
-    public static final double kHighNodeScorePosCube = -10;
-    public static final double kHighNodeScorePosCone = -33;
-    public static final int kTopArmEncoderPort = 0; // for if we add an analog encoder
-    public static final int kSecondArmMotorPort = 17;
+    public static final int m_followerMotor = 17;
   }
 
   public static final class ClimbConstants {

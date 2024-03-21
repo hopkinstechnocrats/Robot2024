@@ -7,7 +7,7 @@ import frc.robot.subsystems.swervedrive.Climb;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
-import frc.robot.subsystems.swervedrive.TopArm;
+import frc.robot.subsystems.swervedrive.Arm;
 
 
 public class MechanismCommands {
@@ -81,15 +81,15 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         intake);
   }
 
-  public static Command armZero(TopArm arm) {
+  public static Command armZero(Arm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorDownPosition(0); //TO DO: test
+          arm.setMotorDownPosition(1); //TO DO: test
         },
         arm);
   }
 
-  public static Command armScoringLess(TopArm arm) {
+  public static Command armScoringLess(Arm arm) {
     return Commands.run(
         () -> {
           arm.setMotorDownPosition(110); //TO DO: test
@@ -97,7 +97,7 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         arm);
   }
 
-  public static Command armScoring(TopArm arm) {
+  public static Command armScoring(Arm arm) {
     return Commands.run(
         () -> {
           arm.setMotorDownPosition(115); //TO DO: test
@@ -105,7 +105,7 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         arm);
   }
 
-  public static Command armScoringMore(TopArm arm) {
+  public static Command armScoringMore(Arm arm) {
     return Commands.run(
         () -> {
           arm.setMotorDownPosition(120); //TO DO: test

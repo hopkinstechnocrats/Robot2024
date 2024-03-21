@@ -23,7 +23,7 @@ import frc.robot.subsystems.swervedrive.Climb;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
-import frc.robot.subsystems.swervedrive.TopArm;
+import frc.robot.subsystems.swervedrive.Arm;
 
 import java.io.File;
 
@@ -43,7 +43,7 @@ public class RobotContainer
   private final EndEffector endEffector = new EndEffector();
   private final Climb climb = new Climb();
   private final Intake intake = new Intake();
-  private final TopArm arm = new TopArm();
+  private final Arm arm = new Arm();
 
   private final SendableChooser<Command> autoChooser;
 
