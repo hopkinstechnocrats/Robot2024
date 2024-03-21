@@ -128,6 +128,7 @@ public class RobotContainer
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
     operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
     operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
+    operatorController.x().whileTrue(MechanismCommands.speakerScoring(arm));
 
     //not functional
     operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
@@ -139,6 +140,9 @@ public class RobotContainer
     //Intakes until sensor on end effector detects the note and then reverses for a set amount of time in seconds
     operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
+
+    operatorController.rightBumper().onTrue(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5)
+    .andThen(MechanismCommands.moveEndEffector(endEffector).withTimeout(1)));
 
 
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
