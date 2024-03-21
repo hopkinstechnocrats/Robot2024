@@ -138,7 +138,7 @@ public class RobotContainer
 
     //Intakes until sensor on end effector detects the note and then reverses for a set amount of time in seconds
     operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
-    .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.13)));
+    .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
 
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
