@@ -20,6 +20,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.MechanismCommands;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.Climb;
+import frc.robot.subsystems.swervedrive.ClimbServo;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
@@ -44,6 +45,7 @@ public class RobotContainer
   private final Climb climb = new Climb();
   private final Intake intake = new Intake();
   private final Arm arm = new Arm();
+  private final ClimbServo servo = new ClimbServo();
 
   private final SendableChooser<Command> autoChooser;
 
@@ -132,7 +134,7 @@ public class RobotContainer
 
     //not functional
     operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
-    operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb));
+    operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb).andThen(MechanismCommands.servoLock(servo)));
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 

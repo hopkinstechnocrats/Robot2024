@@ -92,4 +92,7 @@ public final class Constants
     public static final double climbSpeedDown = 1;
   }
 
+  public static final class ClimbServoConstants {
+     } 
+
 }
