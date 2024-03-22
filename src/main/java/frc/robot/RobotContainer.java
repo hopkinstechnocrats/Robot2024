@@ -122,13 +122,13 @@ public class RobotContainer
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-    driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
+    //driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
 
 
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
     operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
     operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
-    operatorController.x().whileTrue(MechanismCommands.speakerScoring(arm));
+    //operatorController.x().whileTrue(MechanismCommands.speakerScoring(arm));
 
     //not functional
     operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
@@ -142,13 +142,13 @@ public class RobotContainer
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
     operatorController.rightBumper().onTrue(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5)
-    .andThen(MechanismCommands.moveEndEffector(endEffector).withTimeout(1)));
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
 
 
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
-    operatorController.povRight().whileTrue(MechanismCommands.armScoringMore(arm));
+    operatorController.povRight().whileTrue(MechanismCommands.speakerScoring(arm));
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
-    operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
+    //operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
    
 
 // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());

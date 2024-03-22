@@ -49,6 +49,15 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
   
 }
 
+public static Command Launch(EndEffector endEffector){
+  return Commands.run(
+        () -> {
+          endEffector.spinBlueWheel();
+          endEffector.spinRollers();
+        },
+        endEffector);
+}
+
   public static Command spinBlueWheel(EndEffector endEffector) {
     return Commands.run(
         () -> {
