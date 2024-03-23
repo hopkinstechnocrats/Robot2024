@@ -141,14 +141,15 @@ public class RobotContainer
     operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
-    operatorController.rightBumper().onTrue(MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
+    operatorController.rightBumper().onTrue(MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
 
 
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
-    operatorController.povRight().whileTrue(MechanismCommands.speakerScoring(arm));
+    operatorController.povRight().whileTrue(MechanismCommands.speakerStraightScoring(arm));
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
-    //operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
+    operatorController.x().onTrue(MechanismCommands.speakerAngleScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
    
 
 // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
