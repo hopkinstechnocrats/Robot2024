@@ -89,7 +89,7 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         arm);
   }
 
-  public static Command armScoring(Arm arm) {
+  public static Command ampScoring(Arm arm) {
     return Commands.run(
         () -> {
           arm.setMotorDownPosition(120); //TO DO: test

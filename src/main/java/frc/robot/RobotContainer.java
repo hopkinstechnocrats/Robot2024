@@ -137,7 +137,7 @@ public class RobotContainer
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
 
-    //Intakes until sensor on end effector detects the note and then reverses for a set amount of time in seconds
+    //Intakesl until sensor on end effector detects the note and then reverses for a set amount of time in seconds
     operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
@@ -145,7 +145,7 @@ public class RobotContainer
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
 
 
-    operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm).andThen(MechanismCommands.spinBlueWheel(endEffector)));
+    operatorController.povUp().whileTrue(MechanismCommands.ampScoring(arm).andThen(MechanismCommands.spinBlueWheel(endEffector)).withTimeout(2.5));
     operatorController.povRight().whileTrue(MechanismCommands.speakerScoring(arm));
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
     //operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
