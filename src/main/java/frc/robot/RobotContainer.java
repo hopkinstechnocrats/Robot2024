@@ -145,7 +145,7 @@ public class RobotContainer
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
 
 
-    operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
+    operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm).andThen(MechanismCommands.spinBlueWheel(endEffector)));
     operatorController.povRight().whileTrue(MechanismCommands.speakerScoring(arm));
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
     //operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
