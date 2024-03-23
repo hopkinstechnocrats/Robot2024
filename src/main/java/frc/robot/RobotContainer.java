@@ -128,7 +128,9 @@ public class RobotContainer
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
     operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
     operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
-    //operatorController.x().whileTrue(MechanismCommands.speakerScoring(arm));
+    operatorController.x().whileTrue(MechanismCommands.speakerScoring(arm).andThen(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
+    .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)).raceWith(MechanismCommands.sendIt(endEffector)))
+    );
 
     //not functional
     operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
