@@ -58,6 +58,9 @@ public class RobotContainer
    */
   public RobotContainer()
   {
+    NamedCommands.registerCommand("speakerNoteScoring", MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
+    
      autoChooser = AutoBuilder.buildAutoChooser();
      SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
@@ -107,9 +110,6 @@ public class RobotContainer
         endEffector.setDefaultCommand(MechanismCommands.moveEndEffector(endEffector));
         intake.setDefaultCommand(MechanismCommands.moveNoIntake(intake));
         climb.setDefaultCommand(MechanismCommands.noClimb(climb));
-
-        NamedCommands.registerCommand("speakerNoteScoring", MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
-    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
     
         
   }
