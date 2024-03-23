@@ -28,6 +28,7 @@ import frc.robot.subsystems.swervedrive.Arm;
 import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -106,6 +107,9 @@ public class RobotContainer
         endEffector.setDefaultCommand(MechanismCommands.moveEndEffector(endEffector));
         intake.setDefaultCommand(MechanismCommands.moveNoIntake(intake));
         climb.setDefaultCommand(MechanismCommands.noClimb(climb));
+
+        NamedCommands.registerCommand("speaker1NoteScoring", MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
     
         
   }
@@ -141,9 +145,8 @@ public class RobotContainer
     operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
-    operatorController.rightBumper().onTrue(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5)
+    operatorController.rightBumper().onTrue(MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
-
 
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
     operatorController.povRight().whileTrue(MechanismCommands.speakerScoring(arm));
