@@ -108,7 +108,7 @@ public class RobotContainer
         intake.setDefaultCommand(MechanismCommands.moveNoIntake(intake));
         climb.setDefaultCommand(MechanismCommands.noClimb(climb));
 
-        NamedCommands.registerCommand("speaker1NoteScoring", MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
+        NamedCommands.registerCommand("speakerNoteScoring", MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
     
         
