@@ -89,18 +89,11 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         arm);
   }
 
-  public static Command armScoringLess(Arm arm) {
-    return Commands.run(
-        () -> {
-          arm.setMotorDownPosition(110); //TO DO: test
-        },
-        arm);
-  }
 
   public static Command armScoring(Arm arm) {
     return Commands.run(
         () -> {
-          arm.setMotorDownPosition(115); //TO DO: test
+          arm.setMotorDownPosition(120); //TO DO: test
         },
         arm);
   }
@@ -113,13 +106,6 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         arm);
   }
 
-  public static Command armScoringMore(Arm arm) {
-    return Commands.run(
-        () -> {
-          arm.setMotorDownPosition(120); //TO DO: test
-        },
-        arm);
-  }
 
   public static Command climbUp(Climb climb) {
     return Commands.run(
