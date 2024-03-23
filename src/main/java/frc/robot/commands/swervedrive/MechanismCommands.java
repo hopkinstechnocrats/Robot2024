@@ -181,4 +181,13 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         endEffector);
   }
 
+  public static Command Launch(EndEffector endEffector){
+    return Commands.run(
+          () -> {
+            endEffector.spinBlueWheel();
+            endEffector.spinRollers();
+          },
+          endEffector);
+  }
+
 }
