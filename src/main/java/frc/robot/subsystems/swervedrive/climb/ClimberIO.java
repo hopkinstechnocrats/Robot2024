@@ -23,9 +23,9 @@ public class ClimberIO extends SubsystemBase{
     public ClimberIO(String name, int motorPort, double kP, double kI, double kD, double kEncoderTicksPerRevolution, double maxVelocity, double maxAcceleration){
         this.name = name;
         stringClimber = new AnalogPotentiometer(0, 2.037, 0); //does fullRange hold true?
-        kP = ClimberConstants.kP;
-        kI = ClimberConstants.kI;
-        kD = ClimberConstants.kD;
+        kP = this.kP; 
+        kI = this.kI; 
+        kD = this.kD;
     
         feedback = new ProfiledPIDController(kP, kI, kD, new TrapezoidProfile.Constraints(maxVelocity, maxAcceleration));
         motor = new WPI_TalonFX(motorPort, "GertrudeGreyser");

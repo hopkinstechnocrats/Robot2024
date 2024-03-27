@@ -102,7 +102,9 @@ public final class Constants
     public static final double kI = 0;
     public static final double kD = 0;
     public static final int motorPort = 20;
-
+    public static final double kEncoderTicksPerRevolution = 2048;
+    public static final double maxVelocity = 0.9;
+    public static final double maxAcceleration = 1.25;
   }
 
 }

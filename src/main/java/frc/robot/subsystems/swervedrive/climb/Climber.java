@@ -3,12 +3,14 @@ package frc.robot.subsystems.swervedrive.climb;
 import com.ctre.phoenix.Logger;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ClimberConstants;
+
 import java.util.ArrayList;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class Climber extends SubsystemBase {
 
-    public ClimberIO m_climberIO = new ClimberIO("Climb", 20, 7, 0.7, 0, 2048, .9, 1.25);
+    public ClimberIO m_climberIO = new ClimberIO("Climb", ClimberConstants.motorPort, ClimberConstants.kP, ClimberConstants.kI, ClimberConstants.kD, ClimberConstants.kEncoderTicksPerRevolution, ClimberConstants.maxVelocity, ClimberConstants.maxAcceleration);
     //ClosedLoopIOInputs inputs;
     int speed = 0;
 
