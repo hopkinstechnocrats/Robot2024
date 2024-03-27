@@ -133,8 +133,8 @@ public class RobotContainer
     operatorController.x().whileTrue(MechanismCommands.speakerScoring(arm));
 
     //not functional
-    operatorController.leftBumper().whileTrue(MechanismCommands.climbUp(climb));
-    operatorController.leftTrigger().whileTrue(MechanismCommands.climbDown(climb).andThen(MechanismCommands.servoLock(servo)));
+    operatorController.leftBumper().onTrue(MechanismCommands.climbUp(climb).withTimeout(2));
+    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(2).andThen(MechanismCommands.servoLock(servo)));
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
