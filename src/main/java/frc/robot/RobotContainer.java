@@ -141,7 +141,7 @@ public class RobotContainer
     operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
-    operatorController.rightBumper().onTrue(MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
+    operatorController.rightBumper().onTrue(MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(0.75))
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
 
 
