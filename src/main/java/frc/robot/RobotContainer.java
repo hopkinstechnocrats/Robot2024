@@ -24,6 +24,7 @@ import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import frc.robot.subsystems.swervedrive.Arm;
+import frc.robot.subsystems.UltraSonic;
 
 import java.io.File;
 
@@ -44,6 +45,7 @@ public class RobotContainer
   private final Climb climb = new Climb();
   private final Intake intake = new Intake();
   private final Arm arm = new Arm();
+  private final UltraSonic US = new UltraSonic();
 
   private final SendableChooser<Command> autoChooser;
 
@@ -123,6 +125,7 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
     //driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
+    driverXbox.x().whileTrue(MechanismCommands.USStatus(US));
 
 
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));

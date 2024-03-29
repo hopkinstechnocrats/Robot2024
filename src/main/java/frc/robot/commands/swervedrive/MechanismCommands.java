@@ -8,6 +8,9 @@ import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import frc.robot.subsystems.swervedrive.Arm;
+import frc.robot.subsystems.UltraSonic;
+
+
 
 
 public class MechanismCommands {
@@ -176,4 +179,12 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
           endEffector);
   }
 
+
+  public static Command USStatus(UltraSonic US){
+    return Commands.run(
+          () -> {
+            US.PrintStatus();
+          },
+          US);
+  }
 }
