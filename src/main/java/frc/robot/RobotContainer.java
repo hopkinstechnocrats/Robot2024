@@ -137,11 +137,12 @@ public class RobotContainer
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
     operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
     operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
+    operatorController.x().whileTrue(MechanismCommands.servoLock(servo));
 
 
     //not functional
     operatorController.leftBumper().onTrue(MechanismCommands.climbUp(climb).withTimeout(2));
-    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(0.5));
+    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(0.5).andThen(MechanismCommands.servoLock(servo))); //TODO: TEST!
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
@@ -157,7 +158,7 @@ public class RobotContainer
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
     operatorController.povRight().whileTrue(MechanismCommands.speakerStraightScoring(arm));
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
-    operatorController.povLeft().whileTrue(MechanismCommands.speakerAngleScoring(arm));
+    operatorController.povLeft().whileTrue(MechanismCommands.servoUnock(servo)); //not working
    
 
 // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
