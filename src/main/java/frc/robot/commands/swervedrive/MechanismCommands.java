@@ -141,7 +141,7 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
   public static Command servoLock(ClimbServo servo) {
     return Commands.run(
         () -> {
-          servo.servoLock(90);
+          servo.servoLock(45);
         },
         servo);
   }
