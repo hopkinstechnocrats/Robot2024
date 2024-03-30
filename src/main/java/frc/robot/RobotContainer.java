@@ -134,7 +134,7 @@ public class RobotContainer
 
     //not functional
     operatorController.leftBumper().onTrue(MechanismCommands.climbUp(climb).withTimeout(2));
-    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(2).andThen(MechanismCommands.servoLock(servo)));
+    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(0.5));
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
