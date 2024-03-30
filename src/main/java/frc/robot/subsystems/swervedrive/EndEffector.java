@@ -5,6 +5,8 @@ import java.util.function.BooleanSupplier;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkPIDController;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -17,6 +19,8 @@ public class EndEffector extends SubsystemBase {
 
   CANSparkMax blueWheelMotor;
   RelativeEncoder blueWheelEncoder;
+  private SparkPIDController m_pidController;
+  public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
 
   CANSparkMax rollersMotor;
   RelativeEncoder rollersEncoder;
@@ -44,6 +48,11 @@ public class EndEffector extends SubsystemBase {
     rollersMotor.burnFlash(); // Save settings even after brownout
 
     blueWheelMotor = new CANSparkMax(EndEffectorConstants.kBlueMotorPort, MotorType.kBrushless);
+    
+    blueWheelMotor.restoreFactoryDefaults();
+    m_pidController = blueWheelMotor.getPIDController();
+    
+
     blueWheelEncoder = blueWheelMotor.getEncoder();
     blueWheelEncoder.setVelocityConversionFactor(EndEffectorConstants.kGearRatio);
     blueWheelMotor.setSmartCurrentLimit(40, 40);
