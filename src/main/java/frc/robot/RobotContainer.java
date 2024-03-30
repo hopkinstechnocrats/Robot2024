@@ -130,11 +130,12 @@ public class RobotContainer
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
     operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
     operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
+    operatorController.x().whileTrue(MechanismCommands.climbDown(climb));
 
 
     //not functional
     operatorController.leftBumper().onTrue(MechanismCommands.climbUp(climb).withTimeout(2));
-    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(2).andThen(MechanismCommands.servoLock(servo)));
+    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(4).andThen(MechanismCommands.servoLock(servo)));
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
