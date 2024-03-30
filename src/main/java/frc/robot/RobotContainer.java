@@ -28,7 +28,9 @@ import frc.robot.subsystems.swervedrive.Arm;
 
 import java.io.File;
 
+import com.fasterxml.jackson.databind.util.Named;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -59,6 +61,11 @@ public class RobotContainer
    */
   public RobotContainer()
   {
+    NamedCommands.registerCommand("autoLaunch", MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(0.75))
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
+    NamedCommands.registerCommand("intake", MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
+    .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
+
      autoChooser = AutoBuilder.buildAutoChooser();
      SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
@@ -143,7 +150,7 @@ public class RobotContainer
     operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
-    operatorController.rightBumper().onTrue(MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(0.75))
+    operatorController.rightBumper().onTrue(MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(1))
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
 
 
