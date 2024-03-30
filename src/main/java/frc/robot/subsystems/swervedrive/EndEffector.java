@@ -5,6 +5,8 @@ import java.util.function.BooleanSupplier;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkPIDController;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -17,6 +19,9 @@ public class EndEffector extends SubsystemBase {
 
   CANSparkMax blueWheelMotor;
   RelativeEncoder blueWheelEncoder;
+  private SparkPIDController m_pidController;
+  private RelativeEncoder m_encoder;
+  public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
 
   CANSparkMax rollersMotor;
   RelativeEncoder rollersEncoder;
@@ -44,10 +49,29 @@ public class EndEffector extends SubsystemBase {
     rollersMotor.burnFlash(); // Save settings even after brownout
 
     blueWheelMotor = new CANSparkMax(EndEffectorConstants.kBlueMotorPort, MotorType.kBrushless);
+    blueWheelMotor.restoreFactoryDefaults();
     blueWheelEncoder = blueWheelMotor.getEncoder();
     blueWheelEncoder.setVelocityConversionFactor(EndEffectorConstants.kGearRatio);
     blueWheelMotor.setSmartCurrentLimit(40, 40);
     blueWheelMotor.burnFlash(); // Save settings even after brownout
+
+    // PID coefficients
+    kP = 6e-5; 
+    kI = 0;
+    kD = 0; 
+    kIz = 0; 
+    kFF = 0.000015; 
+    kMaxOutput = 1; 
+    kMinOutput = -1;
+    maxRPM = 5700;
+
+    // set PID coefficients
+    m_pidController.setP(kP);
+    m_pidController.setI(kI);
+    m_pidController.setD(kD);
+    m_pidController.setIZone(kIz);
+    m_pidController.setFF(kFF);
+    m_pidController.setOutputRange(kMinOutput, kMaxOutput);
   }
 
   public void spinRollers() {
@@ -55,7 +79,8 @@ public class EndEffector extends SubsystemBase {
   }
 
   public void spinBlueWheel() {
-    blueWheelMotor.set(EndEffectorConstants.blueWheelSpeed);
+    double setPoint = -0.6*maxRPM;
+    m_pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
   }
 
    public void reverseSpinRollers() {
@@ -63,11 +88,13 @@ public class EndEffector extends SubsystemBase {
   }
 
    public void reverseSpinBlueWheel() {
-    blueWheelMotor.set(-1*EndEffectorConstants.blueWheelSpeed);  //TODO made a change here.  maybe wont work
+    double setPoint = 0.6*maxRPM;
+    m_pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
   }
 
   public void NoSpin() {
-    blueWheelMotor.set(0);
+    double setPoint = 0.6*maxRPM;
+    m_pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
     rollersMotor.set(0);
   }
 
