@@ -99,7 +99,15 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
         arm);
   }
 
-  public static Command speakerScoring(Arm arm) {
+  public static Command speakerStraightScoring(Arm arm) {
+    return Commands.run(
+        () -> {
+          arm.setMotorDownPosition(14); //TO DO: test
+        },
+        arm);
+  }
+
+  public static Command speakerAngleScoring(Arm arm) {
     return Commands.run(
         () -> {
           arm.setMotorDownPosition(14); //TO DO: test
@@ -127,7 +135,15 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
   public static Command servoLock(ClimbServo servo) {
     return Commands.run(
         () -> {
-          servo.servoLock(45);
+          servo.servoLock(90);
+        },
+        servo);
+  }
+
+  public static Command servoUnock(ClimbServo servo) {
+    return Commands.run(
+        () -> {
+          servo.servoUnlock();
         },
         servo);
   }
