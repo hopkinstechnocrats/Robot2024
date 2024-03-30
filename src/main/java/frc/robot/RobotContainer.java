@@ -29,6 +29,7 @@ import frc.robot.subsystems.swervedrive.Arm;
 import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -59,6 +60,9 @@ public class RobotContainer
    */
   public RobotContainer()
   {
+    NamedCommands.registerCommand("speakerNoteScoring", MechanismCommands.speakerScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(2.5))
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
+    
      autoChooser = AutoBuilder.buildAutoChooser();
      SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
@@ -125,6 +129,7 @@ public class RobotContainer
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
     //driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
+    //driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
 
 
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
@@ -149,7 +154,9 @@ public class RobotContainer
 
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
     operatorController.povRight().whileTrue(MechanismCommands.speakerScoring(arm));
+    operatorController.povRight().whileTrue(MechanismCommands.speakerScoring(arm));
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
+    //operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
     //operatorController.povLeft().whileTrue(MechanismCommands.armScoringLess(arm));
    
 
@@ -166,6 +173,8 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
+    //return drivebase.getAutonomousCommand("New Auto");
+    return autoChooser.getSelected();
     //return drivebase.getAutonomousCommand("New Auto");
     return autoChooser.getSelected();
   

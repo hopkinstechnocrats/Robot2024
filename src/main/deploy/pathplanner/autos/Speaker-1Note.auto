@@ -1,0 +1,38 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.2630356689284812,
+      "y": 5.614572372001888
+    },
+    "rotation": 173.41805534482202
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "AgainstSpeaker"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "speakerNoteScoring"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
