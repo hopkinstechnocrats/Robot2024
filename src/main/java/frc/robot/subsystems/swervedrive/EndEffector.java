@@ -51,7 +51,7 @@ public class EndEffector extends SubsystemBase {
   }
 
   public void spinRollers() {
-    rollersMotor.set(EndEffectorConstants.rollerSpeed);
+    rollersMotor.set(-1*EndEffectorConstants.rollerSpeed);
   }
 
   public void spinBlueWheel() {
@@ -59,7 +59,7 @@ public class EndEffector extends SubsystemBase {
   }
 
    public void reverseSpinRollers() {
-    rollersMotor.set(-1*EndEffectorConstants.rollerSpeed);
+    rollersMotor.set(EndEffectorConstants.rollerSpeed);
   }
 
    public void reverseSpinBlueWheel() {
