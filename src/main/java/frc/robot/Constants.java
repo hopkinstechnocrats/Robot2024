@@ -58,7 +58,7 @@ public final class Constants
     //public static final double EndEffectorSpeedIn = 0.3;
     //public static final double EndEffectorSpeedOut = -0.3;
     public static final double rollerSpeed = 0.8;
-    public static final double blueWheelSpeed = -0.6;
+    public static final double blueWheelSpeed = -1;
 
     //DIO port on the RoboRIO for the beam break
     public static final int BBDIOPort = 0;

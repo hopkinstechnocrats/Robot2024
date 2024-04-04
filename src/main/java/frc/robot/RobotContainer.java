@@ -28,6 +28,7 @@ import frc.robot.subsystems.swervedrive.Arm;
 
 import java.io.File;
 
+import com.fasterxml.jackson.databind.util.Named;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
@@ -60,10 +61,16 @@ public class RobotContainer
    */
   public RobotContainer()
   {
+<<<<<<< HEAD
 
     NamedCommands.registerCommand("autoLaunch", MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(0.75))
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
     NamedCommands.registerCommand("Intake", MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
+=======
+    NamedCommands.registerCommand("autoLaunch", MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(0.75))
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
+    NamedCommands.registerCommand("intake", MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
+>>>>>>> a1d96d84d67c78b6f52b3041e5db62432281e1a1
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
      autoChooser = AutoBuilder.buildAutoChooser();
@@ -137,11 +144,12 @@ public class RobotContainer
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
     operatorController.b().whileTrue(MechanismCommands.sendIt(endEffector));
     operatorController.a().whileTrue(MechanismCommands.spinBlueWheel(endEffector));
+    operatorController.x().whileTrue(MechanismCommands.servoLock(servo));
 
 
     //not functional
     operatorController.leftBumper().onTrue(MechanismCommands.climbUp(climb).withTimeout(2));
-    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(2).andThen(MechanismCommands.servoLock(servo)));
+    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(0.5).andThen(MechanismCommands.servoLock(servo))); //TODO: TEST!
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
@@ -150,14 +158,14 @@ public class RobotContainer
     operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
-    operatorController.rightBumper().onTrue(MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(0.75))
+    operatorController.rightBumper().onTrue(MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(1))
     .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
 
 
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));
     operatorController.povRight().whileTrue(MechanismCommands.speakerStraightScoring(arm));
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
-    operatorController.povLeft().whileTrue(MechanismCommands.speakerAngleScoring(arm));
+    operatorController.povLeft().whileTrue(MechanismCommands.servoUnock(servo)); //not working
    
 
 // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
