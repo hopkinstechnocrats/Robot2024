@@ -221,4 +221,5 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
     MechanismCommands.Launch(endEffector).withTimeout(1)
     );
 
+  }
 }
