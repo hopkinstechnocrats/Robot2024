@@ -201,4 +201,24 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
           endEffector);
   }
 
+
+  public static Command autoClimbDown(Climb climb, ClimbServo servo) {
+    return Commands.sequence(
+          MechanismCommands.climbDown(climb).withTimeout(5.0),
+          MechanismCommands.servoLock(servo));
+}
+
+  public static Command autoIntake(Intake intake, EndEffector endEffector) {
+    return Commands.sequence(
+      MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected()),
+      MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08));
+}
+
+  public static Command autoLaunch(EndEffector endEffector, Arm arm) {
+    return Commands.sequence(
+    MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05),
+    MechanismCommands.spinBlueWheel(endEffector).withTimeout(1),
+    MechanismCommands.Launch(endEffector).withTimeout(1)
+    );
+
 }

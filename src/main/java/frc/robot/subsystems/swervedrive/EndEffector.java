@@ -30,10 +30,10 @@ public class EndEffector extends SubsystemBase {
 
   public EndEffector() {
 
-    inst = NetworkTableInstance.getDefault();
+    /*inst = NetworkTableInstance.getDefault();
     table = inst.getTable("EndEffector");
     setpointLog = table.getEntry("Setpoint (RPM)");
-    currentVelLog = table.getEntry("Current Velocity (RPM)");
+    currentVelLog = table.getEntry("Current Velocity (RPM)");*/
 
     BB = new DigitalInput(Constants.EndEffectorConstants.BBDIOPort);
 

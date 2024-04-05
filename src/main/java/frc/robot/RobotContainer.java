@@ -107,7 +107,7 @@ public class RobotContainer
     Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
         () -> -MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
         () -> -MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> -driverXbox.getRawAxis(2));
+        () -> -driverXbox.getRawAxis(2)); 
 
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation() ? driveFieldOrientedAngularVelocity : driveFieldOrientedDirectAngleSim);
@@ -142,17 +142,15 @@ public class RobotContainer
 
     //not functional
     operatorController.leftBumper().onTrue(MechanismCommands.climbUp(climb).withTimeout(2));
-    operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(0.5).andThen(MechanismCommands.servoLock(servo))); //TODO: TEST!
+    operatorController.leftTrigger().onTrue(MechanismCommands.autoClimbDown(climb, servo));
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
 
 
     //Intakes until sensor on end effector detects the note and then reverses for a set amount of time in seconds
-    operatorController.rightTrigger().whileTrue(MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
-    .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
+    operatorController.rightTrigger().whileTrue(MechanismCommands.autoIntake(intake, endEffector));
 
-    operatorController.rightBumper().onTrue(MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(1))
-    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
+    operatorController.rightBumper().onTrue(MechanismCommands.autoLaunch(endEffector, arm));
 
 
     operatorController.povUp().whileTrue(MechanismCommands.armScoring(arm));

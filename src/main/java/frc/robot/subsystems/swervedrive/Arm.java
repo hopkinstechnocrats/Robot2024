@@ -87,8 +87,8 @@ public class Arm extends SubsystemBase {
     m_pidController.setSmartMotionMaxAccel(maxAcc, smartMotionSlot);
     m_pidController.setSmartMotionAllowedClosedLoopError(allowedErr, smartMotionSlot);
 
-
-    new Thread(
+//this thread may be necessary! Don't know yet!!!
+    /*new Thread(
             () -> {
               try {
                 Thread.sleep(2000);
@@ -96,31 +96,7 @@ public class Arm extends SubsystemBase {
               } catch (Exception e) {
               }
             })
-        .start();
-  }
-
-  @Override
-  public void periodic() {
-    /*  This method will be called once per scheduler run
-    SmartDashboard.putNumber("Top Motor Encoder Position", relativeEncoder.getPosition());
-    SmartDashboard.putNumber("Top Absolute Encoder Position", encoderPositionAngle());
-    SmartDashboard.putNumber(
-        "Top Absolute Position", absDutyCycleEncoder.getAbsolutePosition() * 360);
-    SmartDashboard.putNumber("raw Absolute Encoder", absDutyCycleEncoder.get());
-    SmartDashboard.putBoolean("Reverse Scoring", reverseScore);
-    SmartDashboard.putNumber("Top Arm Output", topArmMotor.getAppliedOutput());
-    SmartDashboard.putNumber("TopArmNodePos", getNodePosition());
-    armGoalPos = SmartDashboard.getNumber("Arm Goal Position", 0);
-    SmartDashboard.putBoolean("Stow Position", getStowPositionState());
-
-    armPIDController.setP(SmartDashboard.getNumber("Top Arm kP", armPIDController.getP()));
-    armPIDController.setI(SmartDashboard.getNumber("Top Arm kI", armPIDController.getI()));
-    armPIDController.setD(SmartDashboard.getNumber("Top Arm kD", armPIDController.getD()));
-    armPIDController.setIZone(
-        SmartDashboard.getNumber("Top Arm IZone", armPIDController.getIZone()));
-
-    SmartDashboard.putNumber("Acutal Top Arm kP", armPIDController.getP()); */
-
+        .start();*/
   }
 
   public Double encoderPositionAngle() {

@@ -71,10 +71,10 @@ public class SwerveSubsystem extends SubsystemBase
     //  The gear ratio is 6.75 motor revolutions per wheel rotation.
     //  The encoder resolution per motor revolution is 1 per motor revolution.
     double driveConversionFactor = SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(4), 6.75);
-    System.out.println("\"conversionFactor\": {");
+    /*System.out.println("\"conversionFactor\": {");
     System.out.println("\t\"angle\": " + angleConversionFactor + ",");
     System.out.println("\t\"drive\": " + driveConversionFactor);
-    System.out.println("}");
+    System.out.println("}");*/
     
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being created.
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.NONE;
@@ -87,7 +87,7 @@ public class SwerveSubsystem extends SubsystemBase
     {
       throw new RuntimeException(e);
     }
-    swerveDrive.setHeadingCorrection(false); // Heading correction should only be used while controlling the robot via angle.
+    swerveDrive.setHeadingCorrection(true); // Heading correction should only be used while controlling the robot via angle.
     swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for simulations since it causes discrepancies not seen in real life.
     setupPathPlanner();
     swerveDrive.setOdometryPeriod(0.100);
@@ -417,9 +417,9 @@ public class SwerveSubsystem extends SubsystemBase
       {
         throw new RuntimeException("Absolute encoder encountered a reading error please debug.");
       }
-      System.out.println("Fetching the current absolute encoder position.");
+      /*System.out.println("Fetching the current absolute encoder position.");
       System.out.println(absoluteEncoder.getAbsolutePosition());
-      SmartDashboard.putNumber("encoder absolute position", absoluteEncoder.getAbsolutePosition());
+      SmartDashboard.putNumber("encoder absolute position", absoluteEncoder.getAbsolutePosition());*/
 
     }
 
