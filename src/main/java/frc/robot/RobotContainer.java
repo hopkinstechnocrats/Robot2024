@@ -62,7 +62,7 @@ public class RobotContainer
   public RobotContainer()
   {
     NamedCommands.registerCommand("autoLaunch", MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(1.5))
-    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)).andThen(MechanismCommands.servoUnock(servo)));
     NamedCommands.registerCommand("intake", MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
@@ -109,8 +109,8 @@ public class RobotContainer
         () -> -MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
         () -> -driverXbox.getRawAxis(2));
 
-    drivebase.setDefaultCommand(
-        !RobotBase.isSimulation() ? driveFieldOrientedAngularVelocity : driveFieldOrientedDirectAngleSim);
+    drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
+       // !RobotBase.isSimulation() ? driveFieldOrientedAngularVelocity : driveFieldOrientedDirectAngleSim);
 
         endEffector.setDefaultCommand(MechanismCommands.moveEndEffector(endEffector));
         intake.setDefaultCommand(MechanismCommands.moveNoIntake(intake));
@@ -131,7 +131,7 @@ public class RobotContainer
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-    //driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
+    driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
 
 
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
