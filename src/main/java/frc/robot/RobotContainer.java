@@ -54,7 +54,7 @@ public class RobotContainer
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final CommandXboxController driverXbox = new CommandXboxController(0);
   final CommandXboxController operatorController = new CommandXboxController(1);
-
+  final CommandXboxController testXbox = new CommandXboxController(2);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -160,6 +160,8 @@ public class RobotContainer
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
     operatorController.povLeft().whileTrue(MechanismCommands.servoUnock(servo)); //not working
    
+    testXbox.a().onTrue(MechanismCommands.servoLock(servo));
+    testXbox.b().onTrue(MechanismCommands.servoUnock(servo));
 
 // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
   }
