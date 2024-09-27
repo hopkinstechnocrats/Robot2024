@@ -15,12 +15,12 @@ public class ClimbServo extends SubsystemBase {
 
     }
 
-    public void servoLock(double angle){
-        climbLocker.setAngle(angle);
+    public void servoLock(double position){
+        climbLocker.set(position);
     }
 
     public void servoUnlock(){
-        climbLocker.setAngle(0);
+        climbLocker.set(0.05);
     }
 
 

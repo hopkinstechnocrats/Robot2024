@@ -8,6 +8,7 @@ import frc.robot.subsystems.swervedrive.ClimbServo;
 import frc.robot.subsystems.swervedrive.EndEffector;
 import frc.robot.subsystems.swervedrive.Intake;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
+import frc.robot.Constants;
 import frc.robot.subsystems.swervedrive.Arm;
 
 
@@ -135,7 +136,7 @@ public static Command fixNotePosition(EndEffector endEffector, Intake intake){
   public static Command servoLock(ClimbServo servo) {
     return Commands.run(
         () -> {
-          servo.servoLock(90);
+          servo.servoLock(Constants.ClimbServoConstants.servoLockPosition);
         },
         servo);
   }

@@ -54,7 +54,7 @@ public class RobotContainer
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final CommandXboxController driverXbox = new CommandXboxController(0);
   final CommandXboxController operatorController = new CommandXboxController(1);
-
+  final CommandXboxController testXbox = new CommandXboxController(2);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -62,7 +62,7 @@ public class RobotContainer
   public RobotContainer()
   {
     NamedCommands.registerCommand("autoLaunch", MechanismCommands.speakerStraightScoring(arm).withTimeout(0.05).andThen(MechanismCommands.spinBlueWheel(endEffector).withTimeout(1.5))
-    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)));
+    .andThen(MechanismCommands.Launch(endEffector).withTimeout(1)).andThen(MechanismCommands.servoUnock(servo)));
     NamedCommands.registerCommand("intake", MechanismCommands.Intake(endEffector, intake).until(endEffector.NoteDetected())
     .andThen(MechanismCommands.fixNotePosition(endEffector, intake).withTimeout(0.08)));
 
@@ -109,8 +109,8 @@ public class RobotContainer
         () -> -MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
         () -> -driverXbox.getRawAxis(2));
 
-    drivebase.setDefaultCommand(
-        !RobotBase.isSimulation() ? driveFieldOrientedAngularVelocity : driveFieldOrientedDirectAngleSim);
+    drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
+       // !RobotBase.isSimulation() ? driveFieldOrientedAngularVelocity : driveFieldOrientedDirectAngleSim);
 
         endEffector.setDefaultCommand(MechanismCommands.moveEndEffector(endEffector));
         intake.setDefaultCommand(MechanismCommands.moveNoIntake(intake));
@@ -131,7 +131,7 @@ public class RobotContainer
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-    //driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
+    driverXbox.b().onTrue(MechanismCommands.absoluteEncoderPosition(drivebase));
 
 
     operatorController.y().whileTrue(MechanismCommands.reverseEverything(endEffector, intake));
@@ -141,7 +141,7 @@ public class RobotContainer
 
 
     //not functional
-    operatorController.leftBumper().onTrue(MechanismCommands.climbUp(climb).withTimeout(2));
+    operatorController.leftBumper().onTrue(MechanismCommands.climbUp(climb).withTimeout(1.75));
     operatorController.leftTrigger().onTrue(MechanismCommands.climbDown(climb).withTimeout(0.5).andThen(MechanismCommands.servoLock(servo))); //TODO: TEST!
     
     operatorController.leftStick().whileTrue(MechanismCommands.climbUp(climb)); //not working
@@ -160,6 +160,8 @@ public class RobotContainer
     operatorController.povDown().whileTrue(MechanismCommands.armZero(arm)); //not working
     operatorController.povLeft().whileTrue(MechanismCommands.servoUnock(servo)); //not working
    
+    testXbox.a().onTrue(MechanismCommands.servoLock(servo));
+    testXbox.b().onTrue(MechanismCommands.servoUnock(servo));
 
 // driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
   }

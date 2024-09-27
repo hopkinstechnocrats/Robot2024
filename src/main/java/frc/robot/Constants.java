@@ -88,11 +88,16 @@ public final class Constants
   }
 
   public static final class ClimbConstants {
-    public static final double climbSpeedUp = -0.2;
+    public static final double climbSpeedUp = -0.5;
     public static final double climbSpeedDown = 1;
+
+    
   }
 
   public static final class ClimbServoConstants {
-     } 
+    
+    public static final double servoLockPosition = 0.3;
+  
+  } 
 
 }
